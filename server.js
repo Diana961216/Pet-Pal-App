@@ -6,20 +6,31 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
+const passUserToView = require('./middleware/pass-user-to-view.js');
+const isSignedIn = require('./middleware/is-signed-in.js');
+const User = require('./models/user.js');
+const Pet = require('./models/pet.js');
+const Application = require('./models/application.js');
 
 const authController = require('./controllers/auth.js');
 
-const port = process.env.PORT ? process.env.PORT : '3000';
+const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
+mongoose.connection.on('error', (err) => {
+  console.log(`MongoDB connection error: ${err}`);
+});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -27,22 +38,17 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(passUserToView);
+app.use('/auth', authController);
+app.use(isSignedIn);
+app.use('/pets', require('./controllers/pet.js'));
+
 
 app.get('/', (req, res) => {
   res.render('index.ejs', {
     user: req.session.user,
   });
 });
-
-app.get('/vip-lounge', (req, res) => {
-  if (req.session.user) {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-  } else {
-    res.send('Sorry, no guests allowed.');
-  }
-});
-
-app.use('/auth', authController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= user.username %>'s Pets</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Welcome to your pet page, <%= user.username %>!</h1>
+
+    <p>Here are your pets:</p>
+    <ul>
+      <% pets.forEach(pet => { %>
+      <li><%= pet.name %> - <%= pet.breed %></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
