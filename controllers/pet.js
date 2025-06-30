@@ -90,5 +90,18 @@ router.post('/', async (req, res) => {
       res.redirect('/pets');
     }
   });
+
+    router.delete('/:petId', async (req, res) => {
+    try {
+      const pet = await Pet.findByIdAndDelete(req.params.petId);
+      if (!pet) {
+        return res.status(404).send('Pet not found');
+      }
+      res.redirect('/pets');
+    } catch (error) {
+      console.error(error);
+      res.redirect('/pets');
+    }
+  });
     
 module.exports = router;

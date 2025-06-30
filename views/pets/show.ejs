@@ -17,5 +17,13 @@
     >
       <button type="submit">Edit Pet</button>
     </form>
+    <form
+      action="/pets/<%= pet._id %>?_method=DELETE"
+      method="POST"
+      style="display: inline"
+    >
+      <button type="submit">Delete Pet</button>
+    </form>
+    <p></p>
   </body>
 </html>
