@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pet.name %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1><%= pet.name %> - <%= pet.breed %></h1>
+    <p>Age: <%= pet.age %></p>
+    <p>Owner: <%= pet.owner.username %></p>
+    <form
+      action="/pets/<%= pet._id %>/edit"
+      method="GET"
+      style="display: inline"
+    >
+      <button type="submit">Edit Pet</button>
+    </form>
+  </body>
+</html>
