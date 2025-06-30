@@ -11,15 +11,13 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const User = require('./models/user.js');
 const Pet = require('./models/pet.js');
 const Application = require('./models/application.js');
+const getPets = require('./utils/getPets.js');
 
 const authController = require('./controllers/auth.js');
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
@@ -40,14 +38,15 @@ app.use(
 );
 app.use(passUserToView);
 app.use('/auth', authController);
-app.use(isSignedIn);
-app.use('/pets', require('./controllers/pet.js'));
-app.use(/explore/, require('./controllers/explore.js'));
+app.use('/pets', isSignedIn, require('./controllers/pet.js'));
+app.use(/explore/, isSignedIn, require('./controllers/explore.js'));
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+  const pets = await getPets(); 
   res.render('index.ejs', {
     user: req.session.user,
+    pets
   });
 });
 

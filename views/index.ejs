@@ -6,17 +6,40 @@
     <title>Home Page</title>
   </head>
   <body>
-    <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
-    <p>
-      <a href="/auth/sign-out">Sign out</a>
-    </p>
+    <div class="landing-container">
+      <% if (!user) { %>
+      <h1>Welcome to PetPal!</h1>
+      <p>Your place to find and adopt loving pets.</p>
+      <a href="/auth/sign-in" class="btn">Sign In</a>
+      <a href="/auth/sign-up" class="btn">Sign Up</a>
+      <% } else { %>
+      <h1>Welcome back, <%= user.name %>!</h1>
+      <p>Ready to explore new pets today?</p>
+      <a href="/pets" class="btn">View Pets</a>
+      <a href="/users/<%= user._id %>" class="btn">Your Profile</a>
+      <% } %>
+    </div>
+
+    <h2>Adoptable Pets Near You</h2>
+    <% if (pets && pets.length > 0) { %>
+    <ul>
+      <% pets.forEach(pet => { %>
+      <li style="margin-bottom: 20px">
+        <strong><%= pet.name %></strong>
+        (<%= pet.breeds.primary %>, <%= pet.age %>, <%= pet.gender %>) <% if
+        (pet.photos && pet.photos.length > 0) { %>
+        <br />
+        <img
+          src="<%= pet.photos[0].medium %>"
+          alt="<%= pet.name %>"
+          style="max-width: 300px"
+        />
+        <% } %>
+      </li>
+      <% }) %>
+    </ul>
     <% } else { %>
-    <h1>Welcome to the app, guest.</h1>
-    <p>
-      <a href="/auth/sign-up">Sign up</a> or
-      <a href="/auth/sign-in">Sign in</a>.
-    </p>
+    <p>No pets found. Try again later!</p>
     <% } %>
   </body>
 </html>
