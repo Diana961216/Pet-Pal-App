@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/home.css" />
     <title>Home Page</title>
   </head>
   <body>
@@ -11,12 +12,14 @@
       <h1>Welcome to PetPal!</h1>
       <p>Your place to find and adopt loving pets.</p>
       <a href="/auth/sign-in" class="btn">Sign In</a>
-      <a href="/auth/sign-up" class="btn">Sign Up</a>
+      <a href="/auth/sign-up" class="btn secondary-btn">Sign Up</a>
       <% } else { %>
       <h1>Welcome back, <%= user.name %>!</h1>
       <p>Ready to explore new pets today?</p>
       <a href="/pets" class="btn">View Pets</a>
-      <a href="/users/<%= user._id %>" class="btn">Your Profile</a>
+      <a href="/users/<%= user._id %>" class="btn secondary-btn"
+        >Your Profile</a
+      >
       <% } %>
     </div>
 
@@ -24,16 +27,12 @@
     <% if (pets && pets.length > 0) { %>
     <ul>
       <% pets.forEach(pet => { %>
-      <li style="margin-bottom: 20px">
+      <li>
         <strong><%= pet.name %></strong>
         (<%= pet.breeds.primary %>, <%= pet.age %>, <%= pet.gender %>) <% if
         (pet.photos && pet.photos.length > 0) { %>
         <br />
-        <img
-          src="<%= pet.photos[0].medium %>"
-          alt="<%= pet.name %>"
-          style="max-width: 300px"
-        />
+        <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %>" />
         <% } %>
       </li>
       <% }) %>
