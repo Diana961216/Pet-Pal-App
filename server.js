@@ -42,6 +42,7 @@ app.use(passUserToView);
 app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/pets', require('./controllers/pet.js'));
+app.use(/explore/, require('./controllers/explore.js'));
 
 
 app.get('/', (req, res) => {

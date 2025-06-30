@@ -34,6 +34,7 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         breed: req.body.breed,
         age: req.body.age,
+        gender: req.body.gender,
         owner: req.session.user._id,
       });
   
@@ -78,6 +79,7 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         breed: req.body.breed,
         age: req.body.age,
+        gender: req.body.gender,
       }, { new: true });
   
       if (!pet) {

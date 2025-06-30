@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore Adoptable Pets</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <h1>Explore Adoptable Pets</h1>
+
+    <% if (pets && pets.length > 0) { %>
+    <ul>
+      <% pets.forEach(pet => { %>
+      <li style="margin-bottom: 20px">
+        <strong><%= pet.name %></strong>
+        (<%= pet.breeds.primary %>, <%= pet.age %>, <%= pet.gender %>) <% if
+        (pet.photos && pet.photos.length > 0) { %>
+        <br />
+        <img
+          src="<%= pet.photos[0].medium %>"
+          alt="<%= pet.name %>"
+          style="max-width: 300px"
+        />
+        <% } %>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No pets found. Try again later!</p>
+    <% } %>
+
+    <a href="/">Back to Home</a>
+  </body>
+</html>

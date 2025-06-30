@@ -14,6 +14,9 @@ const petSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
+    gender: {
+      type: String,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
