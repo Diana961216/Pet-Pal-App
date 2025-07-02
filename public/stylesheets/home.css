@@ -1,7 +1,7 @@
 body {
   background-color: #D8DBE2;
   color: #373F51;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -103,21 +103,60 @@ li {
   background: white;
   border: 1px solid #A9BCD0;
   border-radius: 8px;
-  margin: 1rem 0;
-  padding: 1rem;
-  max-width: 300px;
+  padding: 0.5rem; 
+  max-width: 350px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
 }
 
 li img {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 8px;
-  margin-top: 0.5rem;
+  margin: 0; 
+}
+
+.filter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.form-group label {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+ 
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.5rem;
+  border: 1px solid #A9BCD0;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.filter-form .btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 80px;
+  background-color: #58A4B0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }

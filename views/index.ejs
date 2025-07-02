@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/stylesheets/home.css" />
     <title>Home Page</title>
   </head>
@@ -24,6 +28,30 @@
     </div>
 
     <h2 class="adopt">Adoptable Pets Near You</h2>
+    <form class="filter-form" action="/pets" method="GET">
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          placeholder="e.g. Miami, FL"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type of pet:</label>
+        <select id="type" name="type">
+          <option value="">Any</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="rabbit">Rabbit</option>
+          <option value="small-furry">Small & Furry</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">Search</button>
+    </form>
     <div class="scroll-wrapper">
       <button
         class="scroll-btn left"
@@ -32,18 +60,21 @@
       >
         &#8592;
       </button>
+
       <div class="scroll-container">
         <ul>
-          <% pets.forEach(pet => { %>
+          <% pets.forEach(pet => { %> <% if (pet.photos && pet.photos.length) {
+          %>
           <li>
             <strong><%= pet.name %></strong>
-            (<%= pet.breeds.primary %>, <%= pet.age %>, <%= pet.gender %>) <% if
-            (pet.photos && pet.photos.length > 0) { %>
-            <br />
-            <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %>" />
-            <% } %>
+            (<%= pet.breeds?.primary || 'Unknown' %>, <%= pet.age %>, <%=
+            pet.gender %>)
+            <img
+              src="<%= pet.photos[0].medium %>"
+              alt="Photo of <%= pet.name %>"
+            />
           </li>
-          <% }) %>
+          <% } %> <% }) %>
         </ul>
       </div>
       <button
@@ -60,10 +91,10 @@
 
       function startScroll(direction) {
         const container = document.querySelector(".scroll-container");
-        stopScroll(); // clear any previous interval
+        stopScroll();
         scrollInterval = setInterval(() => {
-          container.scrollBy({ left: direction * 5 }); // speed here
-        }, 10); // delay between scrolls
+          container.scrollBy({ left: direction * 5 });
+        }, 10);
       }
 
       function stopScroll() {
