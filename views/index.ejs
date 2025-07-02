@@ -25,7 +25,13 @@
 
     <h2 class="adopt">Adoptable Pets Near You</h2>
     <div class="scroll-wrapper">
-      <button class="scroll-btn left" onclick="scrollLeft()">&#8592;</button>
+      <button
+        class="scroll-btn left"
+        onmouseenter="startScroll(-1)"
+        onmouseleave="stopScroll()"
+      >
+        &#8592;
+      </button>
       <div class="scroll-container">
         <ul>
           <% pets.forEach(pet => { %>
@@ -40,19 +46,28 @@
           <% }) %>
         </ul>
       </div>
-      <button class="scroll-btn right" onclick="scrollRight()">&#8594;</button>
+      <button
+        class="scroll-btn right"
+        onmouseenter="startScroll(1)"
+        onmouseleave="stopScroll()"
+      >
+        &#8594;
+      </button>
     </div>
 
     <script>
-      function scrollLeft() {
-        document
-          .querySelector(".scroll-container")
-          .scrollBy({ left: -300, behavior: "smooth" });
+      let scrollInterval;
+
+      function startScroll(direction) {
+        const container = document.querySelector(".scroll-container");
+        stopScroll(); // clear any previous interval
+        scrollInterval = setInterval(() => {
+          container.scrollBy({ left: direction * 5 }); // speed here
+        }, 10); // delay between scrolls
       }
-      function scrollRight() {
-        document
-          .querySelector(".scroll-container")
-          .scrollBy({ left: 300, behavior: "smooth" });
+
+      function stopScroll() {
+        clearInterval(scrollInterval);
       }
     </script>
   </body>

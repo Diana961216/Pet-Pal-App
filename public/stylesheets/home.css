@@ -19,7 +19,6 @@ h1, h2 {
   padding: 2rem;
 }
 
-
 nav {
   background-color: #373F51;
   color: white;
@@ -39,12 +38,10 @@ nav a:hover {
   text-decoration: underline;
 }
 
-
 .landing-container {
   text-align: center;
   padding: 3rem 1rem;
 }
-
 
 .btn,
 .scroll-btn {
@@ -72,12 +69,10 @@ nav a:hover {
   background-color: #c78d85;
 }
 
-
 .scroll-btn {
   font-size: 2rem;
   padding: 0.5rem 1rem;
 }
-
 
 .scroll-wrapper {
   display: flex;
@@ -89,6 +84,7 @@ nav a:hover {
 
 .scroll-container {
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   width: 80%;
 }
@@ -102,7 +98,6 @@ nav a:hover {
   list-style: none;
   margin: 0;
 }
-
 
 li {
   background: white;
@@ -125,4 +120,4 @@ li img {
   object-fit: cover;
   border-radius: 8px;
   margin-top: 0.5rem;
-} 
+}
