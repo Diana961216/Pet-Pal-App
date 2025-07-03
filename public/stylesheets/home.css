@@ -16,7 +16,8 @@ h1, h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding:1rem 2rem 2rem 2rem;
+  margin-top: -2rem;
 }
 
 nav {
@@ -40,7 +41,7 @@ nav a:hover {
 
 .landing-container {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 1.5rem 1rem;
 }
 
 .btn,
@@ -87,6 +88,7 @@ nav a:hover {
   overflow-y: hidden;
   scroll-behavior: smooth;
   width: 80%;
+  margin-top: 25px;
 }
 
 .scroll-container ul {
@@ -123,18 +125,31 @@ li img {
 
 .filter-form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6.5rem; 
+  margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+#type{
+  height: 2.5rem;
+  width: 10rem;
+  margin-bottom: 30px;
+}
+
+#location {
+  height: 2.5rem;
+  width: 12rem;
+  margin-bottom: 30px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  text-align: center;
 }
 
 .form-group label {
@@ -149,6 +164,7 @@ li img {
   border: 1px solid #A9BCD0;
   border-radius: 5px;
   font-size: 1rem;
+
 }
 
 .filter-form .btn {
@@ -159,4 +175,7 @@ li img {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: inline-block;
+  position: absolute;
+  margin-top: 150px;
 }
