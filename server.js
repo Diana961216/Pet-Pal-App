@@ -44,7 +44,17 @@ app.use(/explore/, isSignedIn, require('./controllers/explore.js'));
 
 
 app.get('/', async (req, res) => {
-  const pets = await getPets(); 
+  let pets;
+  const { location, type } = req.query;
+
+  if (location || type) {
+    // user submitted the form
+    pets = await getPets({ location: location || '33126', type });
+  } else {
+    // default carousel
+    pets = await getPets();
+  }
+
   res.render('index.ejs', {
     user: req.session.user,
     pets
