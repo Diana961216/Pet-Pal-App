@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Pet = require('../models/pet.js');
 const User = require('../models/user.js');
+const isSignedIn = require('../middleware/is-signed-in.js');
+const isOwner = require('../middleware/is-owner.js');
 
 router.get('/', async (req, res) => {
   try {
@@ -59,7 +61,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-  router.get('/:petId/edit', async (req, res) => {
+  router.get('/:petId/edit', isSignedIn, isOwner, async (req, res) => {
     try {
         const currentUser = await User.findById(req.session.user._id);
         const pet = await Pet.findById(req.params.petId);
@@ -73,7 +75,7 @@ router.post('/', async (req, res) => {
       }
   });
 
-  router.put('/:petId', async (req, res) => {
+  router.put('/:petId', isSignedIn, isOwner, async (req, res) => {
     try {
       const pet = await Pet.findByIdAndUpdate(req.params.petId, {
         name: req.body.name,
@@ -93,7 +95,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-    router.delete('/:petId', async (req, res) => {
+    router.delete('/:petId',isSignedIn,isOwner, async (req, res) => {
     try {
       const pet = await Pet.findByIdAndDelete(req.params.petId);
       if (!pet) {

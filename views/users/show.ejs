@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+    <h2>My Pets Listed for Adoption</h2>
+    <ul>
+      <% myPets.forEach(pet => { %>
+      <li>
+        <a href="/pets/<%= pet._id %>"><%= pet.name %></a>
+        <a href="/pets/<%= pet._id %>/edit">(edit)</a>
+      </li>
+      <% }) %>
+    </ul>
+
+    <h2>My Adoption Applications</h2>
+    <ul>
+      <% myApps.forEach(app => { %>
+      <li>
+        For <a href="/pets/<%= app.pet._id %>"><%= app.pet.name %></a> - Status:
+        <%= app.status %>
+        <a href="/pets/<%= app.pet._id %>/applications/<%= app._id %>/edit"
+          >(edit or withdraw)</a
+        >
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

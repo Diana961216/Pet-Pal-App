@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Application</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <h1>Edit your application for <%= app.pet.name %></h1>
+
+    <form
+      action="/pets/<%= app.pet._id %>/applications/<%= app._id %>?_method=PUT"
+      method="POST"
+    >
+      <div>
+        <label for="message">Why do you want to adopt?</label>
+        <textarea name="message" id="message" required>
+<%= app.message %></textarea
+        >
+      </div>
+      <button type="submit">Update Application</button>
+    </form>
+
+    <form
+      action="/pets/<%= app.pet._id %>/applications/<%= app._id %>?_method=DELETE"
+      method="POST"
+      style="margin-top: 20px"
+    >
+      <button type="submit">Withdraw Application</button>
+    </form>
+
+    <a href="/pets/<%= app.pet._id %>">Back to <%= app.pet.name %></a>
+  </body>
+</html>

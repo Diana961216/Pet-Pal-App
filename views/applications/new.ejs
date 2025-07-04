@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply to Adopt</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <h1>Apply to adopt <%= pet.name %></h1>
+
+    <form action="/pets/<%= pet._id %>/applications" method="POST">
+      <div>
+        <label for="message">Why do you want to adopt?</label>
+        <textarea name="message" id="message" required></textarea>
+      </div>
+      <button type="submit">Submit Application</button>
+    </form>
+
+    <a href="/pets/<%= pet._id %>">Back to <%= pet.name %></a>
+  </body>
+</html>

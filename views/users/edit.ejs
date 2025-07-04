@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+    <h1>Edit Your Profile</h1>
+    <form action="/users/<%= user._id %>?_method=PUT" method="POST">
+      <label>Username:</label>
+      <input type="text" name="username" value="<%= user.username %>" />
+      <label>New Password:</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="Leave blank to keep current"
+      />
+      <button type="submit">Update Profile</button>
+    </form>
+
+    <form
+      action="/users/<%= user._id %>?_method=DELETE"
+      method="POST"
+      style="margin-top: 20px"
+    >
+      <button type="submit" style="background: red">Delete My Account</button>
+    </form>
+  </body>
+</html>

@@ -26,5 +26,10 @@
       <button type="submit">Delete Pet</button>
     </form>
     <p></p>
+    <% if (user && user._id !== pet.owner._id.toString()) { %>
+    <a href="/pets/<%= pet._id %>/applications/new" class="btn"
+      >Apply to Adopt</a
+    >
+    <% } %>
   </body>
 </html>

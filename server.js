@@ -12,6 +12,8 @@ const User = require('./models/user.js');
 const Pet = require('./models/pet.js');
 const Application = require('./models/application.js');
 const getPets = require('./utils/getPets.js');
+const userController = require('./controllers/user.js');
+const isOwner = require('./middleware/is-owner.js');
 
 const authController = require('./controllers/auth.js');
 
@@ -40,18 +42,18 @@ app.use(
 app.use(passUserToView);
 app.use('/auth', authController);
 app.use('/pets', isSignedIn, require('./controllers/pet.js'));
-app.use(/explore/, isSignedIn, require('./controllers/explore.js'));
+app.use('/explore', isSignedIn, require('./controllers/explore.js'));
+app.use('/pets/:petId/applications', require('./controllers/application.js'));
+app.use('/users', userController);
 
 
 app.get('/', async (req, res) => {
   let pets;
   const { location, type } = req.query;
 
-  if (location || type) {
-    // user submitted the form
+  if (location || type) { 
     pets = await getPets({ location: location || '33126', type });
   } else {
-    // default carousel
     pets = await getPets();
   }
 

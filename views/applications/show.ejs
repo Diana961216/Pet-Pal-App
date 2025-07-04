@@ -1,0 +1,22 @@
+<h2>Applications</h2>
+<% if (applications.length === 0) { %>
+  <p>No one has applied yet.</p>
+<% } else { %>
+  <% applications.forEach(app => { %>
+    <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+      <strong>From:</strong> <%= app.user.username %> <br>
+      <strong>Message:</strong> <%= app.message %> <br>
+      <strong>Status:</strong> <%= app.status %>
+      <% if (user && pet.owner._id.toString() === user._id.toString()) { %>
+        <form action="/pets/<%= pet._id %>/applications/<%= app._id %>?_method=PUT" method="POST">
+          <select name="status">
+            <option value="pending" <%= app.status==='pending'?'selected':'' %>>Pending</option>
+            <option value="approved" <%= app.status==='approved'?'selected':'' %>>Approved</option>
+            <option value="rejected" <%= app.status==='rejected'?'selected':'' %>>Rejected</option>
+          </select>
+          <button>Update Status</button>
+        </form>
+      <% } %>
+    </div>
+  <% }) %>
+<% } %>
