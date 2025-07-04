@@ -1,6 +1,6 @@
 body {
-  background-color: #D8DBE2;
-  color: #373F51;
+  background-color: #FCFFFD;
+  color: #1A5E63;
   font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   margin: 0;
@@ -8,7 +8,7 @@ body {
 }
 
 h1, h2 {
-  color: #373F51;
+  color: #1A5E63;
 }
 
 .adopt {
@@ -21,7 +21,7 @@ h1, h2 {
 }
 
 nav {
-  background-color: #373F51;
+  background-color: #1A5E63;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -47,7 +47,7 @@ nav a:hover {
 .btn,
 .scroll-btn {
   display: inline-block;
-  background-color: #58A4B0;
+  background-color: #028090;
   color: white;
   padding: 0.75rem 1.5rem;
   margin: 0.5rem;
@@ -59,15 +59,16 @@ nav a:hover {
 
 .btn:hover,
 .scroll-btn:hover {
-  background-color: #4a8c98;
+  background-color: #1A5E63;
 }
 
 .secondary-btn {
-  background-color: #DAA49A;
+  background-color: #C0FDFB;
+  color: #1A5E63;
 }
 
 .secondary-btn:hover {
-  background-color: #c78d85;
+  background-color: #DAFFEF;
 }
 
 .scroll-btn {
@@ -103,11 +104,10 @@ nav a:hover {
 
 li {
   background: white;
-  border: 1px solid #A9BCD0;
-  border-radius: 8px;
+  border: 2px solid #C0FDFB; 
   padding: 0.5rem; 
   max-width: 350px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -155,22 +155,20 @@ li img {
 .form-group label {
   margin-bottom: 0.25rem;
   font-weight: 600;
- 
 }
 
 .form-group input,
 .form-group select {
   padding: 0.5rem;
-  border: 1px solid #A9BCD0;
+  border: 1px solid #1A5E63;
   border-radius: 5px;
   font-size: 1rem;
-
 }
 
 .filter-form .btn {
   padding: 0.5rem 1.5rem;
   border-radius: 80px;
-  background-color: #58A4B0;
+  background-color: #028090;
   color: white;
   border: none;
   cursor: pointer;
