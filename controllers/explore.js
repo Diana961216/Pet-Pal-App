@@ -31,4 +31,29 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:petId', async (req, res) => {
+  try {
+    const token = await getPetfinderToken();
+    const response = await fetch(`https://api.petfinder.com/v2/animals/${req.params.petId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await response.json();
+    const pet = data.animal;
+
+    if (!pet) return res.redirect('/explore');
+
+    res.render('explore/show.ejs', { pet, user: req.session.user });
+  } catch (err) {
+    console.error(err);
+    res.redirect('/explore');
+  }
+});
+
+router.get('/:petId/adopt', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/auth/sign-in');
+  }
+  res.send(`(Future) Start adoption process for API pet ${req.params.petId}`);
+})
+
 module.exports = router;

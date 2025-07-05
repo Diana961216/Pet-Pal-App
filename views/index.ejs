@@ -20,7 +20,7 @@
       <% } else { %>
       <h1>Welcome back, <%= user.username %>!</h1>
       <p>Ready to explore new pets today?</p>
-      <a href="/pets" class="btn">View Pets</a>
+      <a href="/pets" class="btn">View My Pets</a>
       <a href="/users/<%= user._id %>" class="btn secondary-btn"
         >Your Profile</a
       >
@@ -51,6 +51,7 @@
 
       <button type="submit" class="btn">Search</button>
     </form>
+
     <div class="scroll-wrapper">
       <button
         class="scroll-btn left"
@@ -59,7 +60,6 @@
       >
         &#8592;
       </button>
-
       <div class="scroll-container">
         <ul>
           <% pets.forEach(pet => { %> <% if (pet.photos && pet.photos.length) {
@@ -72,6 +72,14 @@
               src="<%= pet.photos[0].medium %>"
               alt="Photo of <%= pet.name %>"
             />
+            <div class="card-buttons">
+              <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
+              <a
+                href="/explore/<%= pet.id %>/adopt"
+                class="btn secondary-btn small-btn"
+                >I want to adopt</a
+              >
+            </div>
           </li>
           <% } %> <% }) %>
         </ul>
@@ -87,7 +95,6 @@
 
     <script>
       let scrollInterval;
-
       function startScroll(direction) {
         const container = document.querySelector(".scroll-container");
         stopScroll();
@@ -95,7 +102,6 @@
           container.scrollBy({ left: direction * 5 });
         }, 10);
       }
-
       function stopScroll() {
         clearInterval(scrollInterval);
       }

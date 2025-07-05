@@ -42,7 +42,7 @@ app.use(
 app.use(passUserToView);
 app.use('/auth', authController);
 app.use('/pets', isSignedIn, require('./controllers/pet.js'));
-app.use('/explore', isSignedIn, require('./controllers/explore.js'));
+app.use('/explore', require('./controllers/explore.js'));
 app.use('/pets/:petId/applications', require('./controllers/application.js'));
 app.use('/users', userController);
 

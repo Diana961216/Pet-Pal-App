@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/explore-show.css" />
+    <title><%= pet.name %> Details</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <div class="container">
+      <h1><%= pet.name %></h1>
+
+      <% if (pet.photos && pet.photos.length) { %>
+      <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %> photo" />
+      <% } %>
+
+      <p><strong>Breed:</strong> <%= pet.breeds?.primary || 'Unknown' %></p>
+      <p><strong>Age:</strong> <%= pet.age %></p>
+      <p><strong>Gender:</strong> <%= pet.gender %></p>
+
+      <div class="description">
+        <strong>Description:</strong>
+        <% if (pet.description) { %>
+        <span><%= pet.description %></span>
+        <% } else { %>
+        <span><em>No description provided.</em></span>
+        <% } %>
+      </div>
+
+      <div class="card-buttons">
+        <% if (!user) { %>
+        <a href="/auth/sign-in" class="btn">I want to adopt</a>
+        <% } else { %>
+        <a href="/pets/<%= pet.id %>/applications/new" class="btn"
+          >I want to adopt</a
+        >
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -177,3 +177,17 @@ li img {
   position: absolute;
   margin-top: 150px;
 }
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn.small-btn,
+.scroll-btn.small-btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+}

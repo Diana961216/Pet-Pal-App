@@ -3,21 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/stylesheets/pets.css" />
-    <title><%= user.username %>'s Pets</title>
+    <title>My Pets for Adoption</title>
   </head>
   <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>Welcome to your pet page, <%= user.username %>!</h1>
+    <%- include('../partials/_navbar') %>
+    <h1 style="text-align: center; margin-top: 1rem">
+      My Pets Listed for Adoption
+    </h1>
 
-    <p>Here are your pets:</p>
-    <ul>
-      <% pets.forEach(pet => { %>
-      <li>
-        <a href="/pets/<%= pet._id %>"> <%= pet.name %> - <%= pet.breed %> </a>
-      </li>
-      <% }) %>
-    </ul>
-    <a href="/pets/new" class="btn">Add New Pet for Adoption</a>
+    <div class="scroll-wrapper">
+      <div class="scroll-container">
+        <ul>
+          <% pets.forEach(pet => { %>
+          <li>
+            <strong><%= pet.name %></strong>
+            (<%= pet.breed %>, <%= pet.age %>, <%= pet.gender %>) <% if
+            (pet.photos && pet.photos.length > 0) { %>
+            <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %>" />
+            <% } %>
+            <div class="card-buttons">
+              <a href="/pets/<%= pet._id %>" class="btn small-btn">View</a>
+              <a
+                href="/pets/<%= pet._id %>/applications/new"
+                class="btn secondary-btn small-btn"
+                >Apply</a
+              >
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>

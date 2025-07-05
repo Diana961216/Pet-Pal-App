@@ -12,6 +12,9 @@
     <p>Age: <%= pet.age %></p>
     <p>Gender: <%= pet.gender %></p>
     <p>Owner: <%= pet.owner.username %></p>
+    <a href="/pets/<%= pet._id %>/applications/new" class="btn secondary-btn"
+      >Apply to Adopt</a
+    >
     <form
       action="/pets/<%= pet._id %>/edit"
       method="GET"
