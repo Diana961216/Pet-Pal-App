@@ -42,6 +42,8 @@ router.get('/:petId', async (req, res) => {
 
     if (!pet) return res.redirect('/explore');
 
+    pet.description = pet.description || 'No description provided.';
+
     res.render('explore/show.ejs', { pet, user: req.session.user });
   } catch (err) {
     console.error(err);
@@ -57,3 +59,4 @@ router.get('/:petId/adopt', (req, res) => {
 })
 
 module.exports = router;
+

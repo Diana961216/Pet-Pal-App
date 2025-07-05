@@ -20,24 +20,21 @@
       <p><strong>Age:</strong> <%= pet.age %></p>
       <p><strong>Gender:</strong> <%= pet.gender %></p>
 
-      <div class="description">
-        <strong>Description:</strong>
-        <% if (pet.description) { %>
-        <span><%= pet.description %></span>
-        <% } else { %>
-        <span><em>No description provided.</em></span>
-        <% } %>
-      </div>
-
       <div class="card-buttons">
         <% if (!user) { %>
         <a href="/auth/sign-in" class="btn">I want to adopt</a>
         <% } else { %>
-        <a href="/pets/<%= pet.id %>/applications/new" class="btn"
-          >I want to adopt</a
-        >
+        <a href="/explore/<%= pet.id %>/adopt" class="btn">I want to adopt</a>
         <% } %>
       </div>
     </div>
+
+    <p class="description">
+      <strong>Description:</strong><br />
+      <% if (pet.description) { %> <%- pet.description.replace(/\n/g, '<br />')
+      %> <% } else { %>
+      <em>No description provided.</em>
+      <% } %>
+    </p>
   </body>
 </html>

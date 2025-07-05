@@ -3,36 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/explore.css" />
-    <title>Explore Adoptable Pets</title>
+    <link rel="stylesheet" href="/stylesheets/explore-show.css" />
+    <title>Explore Pets</title>
   </head>
   <body>
     <%- include('../partials/_navbar') %>
 
-    <h1 style="margin-top: 1rem; text-align: center">Explore Adoptable Pets</h1>
+    <h1>Explore Adoptable Pets</h1>
 
-    <% if (pets && pets.length > 0) { %>
-    <ul>
+    <% if (pets.length > 0) { %>
+    <ul class="explore-list">
       <% pets.forEach(pet => { %>
       <li>
-        <strong><%= pet.name %></strong>
-        (<%= pet.breeds.primary %>, <%= pet.age %>, <%= pet.gender %>) <% if
-        (pet.photos && pet.photos.length > 0) { %>
-        <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %>" />
+        <h2><%= pet.name %></h2>
+        <p>
+          <%= pet.breeds?.primary || 'Unknown Breed' %> - <%= pet.age %> - <%=
+          pet.gender %>
+        </p>
+        <% if (pet.photos && pet.photos.length) { %>
+        <img src="<%= pet.photos[0].medium %>" alt="Photo of <%= pet.name %>" />
         <% } %>
+
         <div class="card-buttons">
           <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
-          <a
-            href="/explore/<%= pet.id %>/adopt"
-            class="btn secondary-btn small-btn"
+          <% if (!user) { %>
+          <a href="/auth/sign-in" class="btn small-btn secondary-btn"
             >I want to adopt</a
           >
+          <% } else { %>
+          <a
+            href="/explore/<%= pet.id %>/adopt"
+            class="btn small-btn secondary-btn"
+            >I want to adopt</a
+          >
+          <% } %>
         </div>
       </li>
       <% }) %>
     </ul>
     <% } else { %>
-    <p style="text-align: center">No pets found. Try again later!</p>
+    <p style="text-align: center">No pets found. Try again later.</p>
     <% } %>
 
     <a
