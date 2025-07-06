@@ -9,8 +9,8 @@
   <body>
     <%- include('../partials/_navbar') %>
 
-    <div class="container">
-      <h1><%= pet.name %></h1>
+    <div class="explore-card" style="max-width: 600px; margin: 2rem auto">
+      <h2><%= pet.name %></h2>
 
       <% if (pet.photos && pet.photos.length) { %>
       <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %> photo" />
@@ -20,7 +20,51 @@
       <p><strong>Age:</strong> <%= pet.age %></p>
       <p><strong>Gender:</strong> <%= pet.gender %></p>
 
-      <div class="card-buttons">
+      <h3>About</h3>
+
+      <% if (pet.tags && pet.tags.length) { %>
+      <p><strong>Characteristics:</strong> <%= pet.tags.join(', ') %></p>
+      <% } %> <% if (pet.attributes?.house_trained !== undefined) { %>
+      <p>
+        <strong>House-trained:</strong> <%= pet.attributes.house_trained ? 'Yes'
+        : 'No' %>
+      </p>
+      <% } %> <% if (pet.attributes?.shots_current ||
+      pet.attributes?.spayed_neutered) { %>
+      <p>
+        <strong>Health:</strong>
+        <% if (pet.attributes.shots_current) { %>Vaccinations up to date<% } %>
+        <% if (pet.attributes.shots_current && pet.attributes.spayed_neutered) {
+        %>, <% } %> <% if (pet.attributes.spayed_neutered) { %>Spayed /
+        Neutered<% } %>
+      </p>
+      <% } %> <% if (pet.environment?.children || pet.environment?.dogs ||
+      pet.environment?.cats) { %>
+      <p>
+        <strong>Good with:</strong>
+        <%= [ pet.environment.children ? 'Children' : null, pet.environment.dogs
+        ? 'Dogs' : null, pet.environment.cats ? 'Cats' : null
+        ].filter(Boolean).join(', ') %>
+      </p>
+      <% } %>
+
+      <h3>Meet <%= pet.name %></h3>
+      <p class="description">
+        <% if (pet.description) { %> <%- pet.description.replace(/\n/g, '<br />')
+        %> <% } else { %>
+        <em>No description provided.</em>
+        <% } %>
+      </p>
+
+      <% if (pet.url) { %>
+      <div class="card-buttons" style="margin-top: 1.5rem">
+        <a href="<%= pet.url %>" target="_blank" class="btn secondary-btn">
+          View Full Profile on Petfinder
+        </a>
+      </div>
+      <% } %>
+
+      <div class="card-buttons" style="margin-top: 2rem">
         <% if (!user) { %>
         <a href="/auth/sign-in" class="btn">I want to adopt</a>
         <% } else { %>
@@ -28,13 +72,5 @@
         <% } %>
       </div>
     </div>
-
-    <p class="description">
-      <strong>Description:</strong><br />
-      <% if (pet.description) { %> <%- pet.description.replace(/\n/g, '<br />')
-      %> <% } else { %>
-      <em>No description provided.</em>
-      <% } %>
-    </p>
   </body>
 </html>

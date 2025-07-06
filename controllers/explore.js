@@ -7,11 +7,12 @@ router.get('/', async (req, res) => {
     const token = await getPetfinderToken();
     const type = req.query.type || '';
     const location = req.query.location || '33126';
+    const breed = req.query.breed || '';
+    const page = parseInt(req.query.page) || 1;
 
-    let url = `https://api.petfinder.com/v2/animals?location=${location}&distance=100&limit=20`;
+    let url = `https://api.petfinder.com/v2/animals?location=${location}&distance=100&limit=24&page=${page}`;
     if (type) url += `&type=${type}`;
-
-    console.log('Explore API call:', url);
+    if (type && breed) url += `&breed=${encodeURIComponent(breed)}`;
 
     const response = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` }
@@ -23,7 +24,10 @@ router.get('/', async (req, res) => {
       pets: data.animals || [],
       user: req.session.user,
       type,
-      location
+      location,
+      breed,
+      currentPage: page,
+      totalPages: data.pagination?.total_pages || 1
     });
   } catch (err) {
     console.error(err);
@@ -40,10 +44,6 @@ router.get('/:petId', async (req, res) => {
     const data = await response.json();
     const pet = data.animal;
 
-    if (!pet) return res.redirect('/explore');
-
-    pet.description = pet.description || 'No description provided.';
-
     res.render('explore/show.ejs', { pet, user: req.session.user });
   } catch (err) {
     console.error(err);
@@ -52,11 +52,8 @@ router.get('/:petId', async (req, res) => {
 });
 
 router.get('/:petId/adopt', (req, res) => {
-  if (!req.session.user) {
-    return res.redirect('/auth/sign-in');
-  }
+  if (!req.session.user) return res.redirect('/auth/sign-in');
   res.send(`(Future) Start adoption process for API pet ${req.params.petId}`);
-})
+});
 
 module.exports = router;
-

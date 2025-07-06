@@ -11,45 +11,77 @@
 
     <h1>Explore Adoptable Pets</h1>
 
-    <% if (pets.length > 0) { %>
-    <ul class="explore-list">
-      <% pets.forEach(pet => { %>
-      <li>
-        <h2><%= pet.name %></h2>
-        <p>
-          <%= pet.breeds?.primary || 'Unknown Breed' %> - <%= pet.age %> - <%=
-          pet.gender %>
-        </p>
-        <% if (pet.photos && pet.photos.length) { %>
-        <img src="<%= pet.photos[0].medium %>" alt="Photo of <%= pet.name %>" />
-        <% } %>
+    <form class="explore-form" action="/explore" method="GET">
+      <div class="form-group">
+        <label for="location">ZIP code:</label>
+        <input
+          type="number"
+          id="location"
+          name="location"
+          placeholder="e.g. 33126"
+          value="<%= location %>"
+          min="0"
+          step="1"
+        />
+      </div>
 
-        <div class="card-buttons">
-          <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
-          <% if (!user) { %>
-          <a href="/auth/sign-in" class="btn small-btn secondary-btn"
-            >I want to adopt</a
-          >
-          <% } else { %>
-          <a
-            href="/explore/<%= pet.id %>/adopt"
-            class="btn small-btn secondary-btn"
-            >I want to adopt</a
-          >
+      <div class="form-group">
+        <label for="type">Type:</label>
+        <select id="type" name="type">
+          <option value="">Any</option>
+          <option value="dog" <%= type === 'dog' ? 'selected' : '' %>>Dog</option>
+          <option value="cat" <%= type === 'cat' ? 'selected' : '' %>>Cat</option>
+          <option value="rabbit" <%= type === 'rabbit' ? 'selected' : '' %>>Rabbit</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="breed">Breed:</label>
+        <input
+          type="text"
+          id="breed"
+          name="breed"
+          placeholder="e.g. Labrador"
+          value="<%= breed %>"
+        />
+      </div>
+
+      <button type="submit" class="btn">Search</button>
+    </form>
+
+    <% if (pets.length > 0) { %>
+      <div class="explore-grid">
+        <% pets.forEach(pet => { %>
+          <% if (pet.photos && pet.photos.length) { %>
+            <div class="explore-card">
+              <h2><%= pet.name %></h2>
+              <p><%= pet.breeds?.primary || 'Unknown' %> - <%= pet.age %> - <%= pet.gender %></p>
+              <img src="<%= pet.photos[0].medium %>" alt="Photo of <%= pet.name %>" />
+              <div class="card-buttons">
+                <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
+                <% if (!user) { %>
+                  <a href="/auth/sign-in" class="btn small-btn secondary-btn">I want to adopt</a>
+                <% } else { %>
+                  <a href="/explore/<%= pet.id %>/adopt" class="btn small-btn secondary-btn">I want to adopt</a>
+                <% } %>
+              </div>
+            </div>
           <% } %>
-        </div>
-      </li>
-      <% }) %>
-    </ul>
+        <% }) %>
+      </div>
+
+      <div class="pagination">
+        <% if (currentPage > 1) { %>
+          <a href="?location=<%= location %>&type=<%= type %>&breed=<%= breed %>&page=<%= currentPage - 1 %>" class="btn small-btn">← Previous</a>
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+          <a href="?location=<%= location %>&type=<%= type %>&breed=<%= breed %>&page=<%= currentPage + 1 %>" class="btn small-btn">Next →</a>
+        <% } %>
+      </div>
     <% } else { %>
-    <p style="text-align: center">No pets found. Try again later.</p>
+      <p style="text-align: center">No pets found. Try again later.</p>
     <% } %>
 
-    <a
-      href="/"
-      class="btn"
-      style="display: block; width: fit-content; margin: 2rem auto"
-      >Back to Home</a
-    >
+    <a href="/" class="btn" style="display: block; width: fit-content; margin: 2rem auto">Back to Home</a>
   </body>
 </html>

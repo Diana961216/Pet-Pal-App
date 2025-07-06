@@ -1,55 +1,164 @@
 body {
-    background-color: #FCFFFD;
-    color: #1A5E63;
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 2rem;
-  }
-  
-  .container {
-    max-width: 500px;
-    margin: 2rem auto;
-    background: white;
-    border: 2px solid #C0FDFB;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  
-  img {
-    max-width: 250px;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
-  
-  p {
-    margin: 0.75rem 0;
-    word-break: break-word;
-  }
-  
-  .card-buttons {
-    margin-top: 2rem;
-  }
-  
-  .btn {
-    background-color: #028090;
-    color: white;
-    text-decoration: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
-    display: inline-block;
-  }
-  
-  .btn:hover {
-    background-color: #1A5E63;
-  }
-  
-  .description {
-    max-width: 700px;
-    margin: 2rem auto;
-    text-align: left;
-  }
-  
+  background-color: #FCFFFD;
+  color: #1A5E63;
+  font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1, h2 {
+  color: #1A5E63;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Form Styling */
+.explore-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  background-color: #f5fefd;
+  border: 2px solid #c0fdfb;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.explore-form .form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.explore-form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.explore-form input,
+.explore-form select {
+  padding: 0.5rem;
+  border: 1px solid #1A5E63;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.explore-form .btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  background-color: #028090;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.explore-form .btn:hover {
+  background-color: #1A5E63;
+}
+
+/* Pet Card Grid Layout */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Individual Pet Card */
+.explore-card {
+  background: white;
+  border: 2px solid #C0FDFB;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.explore-card h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.explore-card p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.explore-card img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin: 0.5rem 0 1rem 0;
+  background-color: #f0f0f0;
+}
+
+/* Card Buttons */
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card-buttons .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #028090;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.card-buttons .btn:hover {
+  background-color: #1A5E63;
+}
+
+.card-buttons .secondary-btn {
+  background-color: #C0FDFB;
+  color: #1A5E63;
+}
+
+.card-buttons .secondary-btn:hover {
+  background-color: #b2fff3;
+}
+
+/* Pagination Buttons */
+.pagination {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.pagination .btn {
+  margin: 0 1rem;
+  padding: 0.5rem 1.25rem;
+  background-color: #1A5E63;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pagination .btn:hover {
+  background-color: #023e42;
+}
