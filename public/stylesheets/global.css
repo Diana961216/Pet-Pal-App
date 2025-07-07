@@ -1,0 +1,81 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FCFFFD;
+    color: #1A5E63;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #1A5E63;
+    padding: 1rem 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: #1A5E63;
+    text-align: center;
+}
+
+
+.flash {
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 800px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.flash.success {
+    background-color: #d4f4dd;
+    color: #1a5e63;
+    border: 1px solid #1a5e63;
+}
+
+.flash.error {
+    background-color: #fde0e0;
+    color: #9b1c1c;
+    border: 1px solid #9b1c1c;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #028090;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #1A5E63;
+}
+
+.secondary-btn {
+    background-color: #C0FDFB;
+    color: #1A5E63;
+}
+
+.secondary-btn:hover {
+    background-color: #b2fff3;
+}
+.scroll-btn {
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+}         

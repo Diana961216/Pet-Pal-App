@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
+const flash = require('express-flash');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 const isSignedIn = require('./middleware/is-signed-in.js');
 const User = require('./models/user.js');
@@ -14,7 +15,6 @@ const Application = require('./models/application.js');
 const getPets = require('./utils/getPets.js');
 const userController = require('./controllers/user.js');
 const isOwner = require('./middleware/is-owner.js');
-
 const authController = require('./controllers/auth.js');
 
 const port = process.env.PORT || 3000;
@@ -36,22 +36,23 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
+app.use(flash());
 app.use(passUserToView);
+
 app.use('/auth', authController);
 app.use('/pets', isSignedIn, require('./controllers/pet.js'));
 app.use('/explore', require('./controllers/explore.js'));
 app.use('/pets/:petId/applications', require('./controllers/application.js'));
 app.use('/users', userController);
 
-
 app.get('/', async (req, res) => {
   let pets;
   const { location, type } = req.query;
 
-  if (location || type) { 
+  if (location || type) {
     pets = await getPets({ location: location || '33126', type });
   } else {
     pets = await getPets();

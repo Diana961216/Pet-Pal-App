@@ -12,3 +12,16 @@
   <a href="/auth/sign-up">Sign Up</a>
   <% } %>
 </nav>
+
+<% if (success && success.length > 0) { %>
+<div class="flash success"><%= success[0] %></div>
+<% } %> <% if (error && error.length > 0) { %>
+<div class="flash error"><%= error[0] %></div>
+<% } %>
+
+<script>
+  setTimeout(() => {
+    const flash = document.querySelector(".flash");
+    if (flash) flash.remove();
+  }, 2000);
+</script>

@@ -3,22 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/applications.css" />
+    <link rel="stylesheet" href="/stylesheets/explore-show.css" />
+    <link rel="stylesheet" href="/stylesheets/global.css" />
     <title>Apply to Adopt</title>
   </head>
   <body>
     <%- include('../partials/_navbar') %>
 
-    <h1>Apply to adopt <%= pet.name %></h1>
+    <div class="explore-card" style="max-width: 600px; margin: 2rem auto">
+      <h2>Apply to adopt <%= pet.name %></h2>
 
-    <form action="/pets/<%= pet._id %>/applications" method="POST">
-      <div>
-        <label for="message">Why do you want to adopt?</label>
-        <textarea name="message" id="message" required></textarea>
+      <% if (pet.photos && pet.photos.length) { %>
+      <img src="<%= pet.photos[0].medium %>" alt="<%= pet.name %> photo" />
+      <% } %>
+
+      <form
+        action="<%= isApiPet ? '/explore/' + pet.id + '/adopt' : '/pets/' + pet._id + '/applications' %>"
+        method="POST"
+        style="margin-top: 1rem"
+      >
+        <% if (isApiPet) { %>
+        <input type="hidden" name="petName" value="<%= pet.name %>" />
+        <% } %>
+
+        <div class="form-group">
+          <label for="message">Why do you want to adopt?</label>
+          <textarea
+            name="message"
+            id="message"
+            required
+            rows="5"
+            style="
+              width: 100%;
+              padding: 0.5rem;
+              border-radius: 6px;
+              border: 1px solid #1a5e63;
+            "
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top: 1rem">
+          Submit Application
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 2rem">
+        <a
+          href="<%= isApiPet ? '/explore/' + pet.id : '/pets/' + pet._id %>"
+          class="btn secondary-btn"
+          >Back to <%= pet.name %></a
+        >
       </div>
-      <button type="submit">Submit Application</button>
-    </form>
-
-    <a href="/pets/<%= pet._id %>">Back to <%= pet.name %></a>
+    </div>
   </body>
 </html>

@@ -1,53 +1,52 @@
 body {
-    background-color: #FCFFFD;
-    color: #1A5E63;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  nav {
-    background-color: #1A5E63;
-    padding: 1rem 2rem;
-  }
-  
-  nav a {
-    color: white;
-    margin-left: 1rem;
-    text-decoration: none;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  form {
-    max-width: 500px;
-    margin: 2rem auto;
-    background: white;
-    border: 2px solid #C0FDFB;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  
-  textarea {
-    width: 100%;
-    border: 1px solid #1A5E63;
-    border-radius: 5px;
-    padding: 0.5rem;
-    font-size: 1rem;
-  }
-  
-  button {
-    background-color: #028090;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-  
-  button:hover {
-    background-color: #1A5E63;
-  }
-  
+  background-color: #FCFFFD;
+  color: #1A5E63;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  background-color: #1A5E63;
+  padding: 1rem 2rem;
+}
+
+nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: white;
+  border: 2px solid #C0FDFB;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid #1A5E63;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #028090;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #1A5E63;
+}

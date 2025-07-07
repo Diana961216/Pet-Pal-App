@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/applications.css">
-    <title>Document</title>
-</head>
-<body>
-    <h2>Applications</h2>
-<% if (applications.length === 0) { %>
-  <p>No one has applied yet.</p>
-<% } else { %>
-  <% applications.forEach(app => { %>
-    <div style="border:1px solid #ccc; margin:10px; padding:10px;">
-      <strong>From:</strong> <%= app.user.username %> <br>
-      <strong>Message:</strong> <%= app.message %> <br>
-      <strong>Status:</strong> <%= app.status %>
-      <% if (user && pet.owner._id.toString() === user._id.toString()) { %>
-        <form action="/pets/<%= pet._id %>/applications/<%= app._id %>?_method=PUT" method="POST">
-          <select name="status">
-            <option value="pending" <%= app.status==='pending'?'selected':'' %>>Pending</option>
-            <option value="approved" <%= app.status==='approved'?'selected':'' %>>Approved</option>
-            <option value="rejected" <%= app.status==='rejected'?'selected':'' %>>Rejected</option>
-          </select>
-          <button>Update Status</button>
-        </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/applications.css" />
+    <title>Application for <%= app.pet.name %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <div class="explore-card" style="max-width: 600px; margin: 2rem auto">
+      <h2>Application for <%= app.pet.name %></h2>
+
+      <% if (app.pet.photos && app.pet.photos.length) { %>
+      <img src="<%= app.pet.photos[0].medium %>" alt="<%= app.pet.name %>" />
       <% } %>
+
+      <p><strong>Status:</strong> <%= app.status %></p>
+      <p><strong>Submitted by:</strong> <%= app.user.username %></p>
+      <p><strong>Submitted on:</strong> <%= app.createdAt.toDateString() %></p>
+
+      <h3>Applicant Message</h3>
+      <p><%= app.message %></p>
+
+      <div class="card-buttons" style="margin-top: 2rem">
+        <a href="/pets/<%= app.pet._id %>" class="btn">Back to Pet</a>
+        <a
+          href="/pets/<%= app.pet._id %>/applications/<%= app._id %>/edit"
+          class="btn secondary-btn"
+          >Edit Application</a
+        >
+      </div>
     </div>
-  <% }) %>
-<% } %>
-    
-</body>
+  </body>
 </html>

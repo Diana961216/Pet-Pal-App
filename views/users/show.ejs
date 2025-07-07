@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/users.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <title>My Dashboard</title>
   </head>
   <body>
     <%- include('../partials/_navbar') %>
+
     <h2>My Pets Listed for Adoption</h2>
     <ul>
       <% myPets.forEach(pet => { %>
@@ -20,13 +22,21 @@
 
     <h2>My Adoption Applications</h2>
     <ul>
-      <% myApps.forEach(app => { %>
+      <% allApps.forEach(app => { %>
       <li>
-        For <a href="/pets/<%= app.pet._id %>"><%= app.pet.name %></a> - Status:
-        <%= app.status %>
-        <a href="/pets/<%= app.pet._id %>/applications/<%= app._id %>/edit"
+        For
+        <a
+          href="<%= app.type === 'internal' ? '/pets/' + app.petId : '/explore/' + app.petId %>"
+        >
+          <%= app.petName %>
+        </a>
+        <% if (app.status) { %> — Status: <%= app.status %>
+        <a href="/pets/<%= app.petId %>/applications/<%= app.appId %>/edit"
           >(edit or withdraw)</a
         >
+        <% } else { %> — Sent: <%= app.date.toDateString() %> <% } %>
+        <br />
+        <strong>Your message:</strong> <%= app.message %>
       </li>
       <% }) %>
     </ul>

@@ -7,14 +7,12 @@ body {
   padding: 0;
 }
 
-/* Headings */
 h1, h2 {
   color: #1A5E63;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-/* Form Styling */
 .explore-form {
   display: flex;
   flex-wrap: wrap;
@@ -63,7 +61,6 @@ h1, h2 {
   background-color: #1A5E63;
 }
 
-/* Pet Card Grid Layout */
 .explore-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -73,7 +70,6 @@ h1, h2 {
   margin: 0 auto;
 }
 
-/* Individual Pet Card */
 .explore-card {
   background: white;
   border: 2px solid #C0FDFB;
@@ -108,7 +104,6 @@ h1, h2 {
   background-color: #f0f0f0;
 }
 
-/* Card Buttons */
 .card-buttons {
   display: flex;
   justify-content: center;
@@ -141,7 +136,6 @@ h1, h2 {
   background-color: #b2fff3;
 }
 
-/* Pagination Buttons */
 .pagination {
   text-align: center;
   margin: 2rem 0;
