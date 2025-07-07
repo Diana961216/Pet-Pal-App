@@ -10,29 +10,48 @@
   <body>
     <%- include('../partials/_navbar') %>
 
-    <h1>Edit your application for <%= app.pet.name %></h1>
+    <div class="explore-card" style="max-width: 600px; margin: 2rem auto;">
+      <h1>Edit your application for <%= isApiPet ? app.petName : app.pet.name %></h1>
 
-    <form
-      action="/pets/<%= app.pet._id %>/applications/<%= app._id %>?_method=PUT"
-      method="POST"
-    >
-      <div>
-        <label for="message">Why do you want to adopt?</label>
-        <textarea name="message" id="message" required>
-<%= app.message %></textarea
-        >
+      <form
+        action="<%= isApiPet
+          ? '/applications/api/' + app._id + '?_method=PUT'
+          : '/pets/' + app.pet._id + '/applications/' + app._id + '?_method=PUT' %>"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="message">Why do you want to adopt?</label>
+          <textarea
+            name="message"
+            id="message"
+            required
+            rows="5"
+            style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid #1A5E63;"
+          ><%= app.message %></textarea>
+        </div>
+
+        <% if (!isApiPet) { %>
+          <div class="form-group" style="margin-top: 1rem;">
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+              <option value="pending" <%= app.status === 'pending' ? 'selected' : '' %>>Pending</option>
+              <option value="approved" <%= app.status === 'approved' ? 'selected' : '' %>>Approved</option>
+              <option value="rejected" <%= app.status === 'rejected' ? 'selected' : '' %>>Rejected</option>
+            </select>
+          </div>
+        <% } %>
+
+        <button type="submit" class="btn" style="margin-top: 1rem;">Update Application</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a
+          href="<%= isApiPet
+            ? '/applications/api/' + app._id
+            : '/pets/' + app.pet._id + '/applications/' + app._id %>"
+          class="btn secondary-btn"
+        >Back</a>
       </div>
-      <button type="submit">Update Application</button>
-    </form>
-
-    <form
-      action="/pets/<%= app.pet._id %>/applications/<%= app._id %>?_method=DELETE"
-      method="POST"
-      style="margin-top: 20px"
-    >
-      <button type="submit">Withdraw Application</button>
-    </form>
-
-    <a href="/pets/<%= app.pet._id %>">Back to <%= app.pet.name %></a>
+    </div>
   </body>
 </html>

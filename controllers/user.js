@@ -29,7 +29,8 @@ router.get('/:userId', isSignedIn, async (req, res) => {
       petName: app.petName,
       petId: app.petId,
       message: app.message,
-      date: app.createdAt
+      date: app.createdAt,
+      _id: app._id // ✅ Required for edit URL
     }))
   ];
 

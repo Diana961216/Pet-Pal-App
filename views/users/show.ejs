@@ -34,7 +34,9 @@
         <a href="/pets/<%= app.petId %>/applications/<%= app.appId %>/edit"
           >(edit or withdraw)</a
         >
-        <% } else { %> — Sent: <%= app.date.toDateString() %> <% } %>
+        <% } else { %> — Sent: <%= app.date.toDateString() %>
+        <a href="/applications/api/<%= app._id %>/edit">(edit)</a>
+        <% } %>
         <br />
         <strong>Your message:</strong> <%= app.message %>
       </li>
