@@ -4,28 +4,28 @@ body {
     font-family: 'Poppins', sans-serif;
   }
   
-  nav {
+nav {
     background-color: #1A5E63;
     color: white;
     padding: 1rem 2rem;
   }
   
-  nav a {
+nav a {
     color: white;
     margin-left: 1rem;
     text-decoration: none;
   }
   
-  nav a:hover {
+nav a:hover {
     text-decoration: underline;
   }
   
-  h1, h2 {
+h1, h2 {
     text-align: center;
     color: #1A5E63;
   }
   
-  ul {
+ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -34,7 +34,7 @@ body {
     padding: 2rem;
   }
   
-  li {
+li {
     background: white;
     border: 2px solid #C0FDFB;
     border-radius: 8px;
@@ -43,8 +43,8 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     text-align: center;
   }
-  
-  button, .btn {
+
+button, .btn {
     background-color: #028090;
     color: white;
     border: none;
@@ -53,20 +53,120 @@ body {
     cursor: pointer;
   }
   
-  button:hover, .btn:hover {
+button:hover, .btn:hover {
     background-color: #1A5E63;
   }
   
-  .card-buttons {
+.card-buttons {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
     margin-top: 0.5rem;
   }
   
-  .btn.small-btn,
-  .scroll-btn.small-btn {
+.btn.small-btn,
+.scroll-btn.small-btn {
     font-size: 0.85rem;
     padding: 0.4rem 1rem;
     border-radius: 5px;
   }
+
+.pet-form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border: 2px solid #C0FDFB;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+.pet-form-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.pet-form-container label {
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  
+.pet-form-container input {
+    padding: 0.5rem;
+    border: 1px solid #1A5E63;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+.pet-form-container button {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    background-color: #028090;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+.pet-form-container button:hover {
+    background-color: #1A5E63;
+  }
+  
+.pet-show-card {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border: 2px solid #C0FDFB;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+.pet-show-card h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+.pet-show-card p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+  
+.pet-show-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pet-show-card .pet-show-buttons a,
+  .pet-show-card .pet-show-buttons form button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #C0FDFB;
+    color: #1A5E63;
+    transition: background-color 0.3s ease;
+    height: 2.4rem;
+    box-sizing: border-box;
+    min-width: 80px;
+    text-decoration: none;
+  }
+  
+  .pet-show-card .pet-show-buttons a:hover,
+  .pet-show-card .pet-show-buttons form button:hover {
+    background-color: #b2fff3;
+  }
+  
+  

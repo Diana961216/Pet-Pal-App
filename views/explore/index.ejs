@@ -12,7 +12,7 @@
 
     <h1>Explore Adoptable Pets</h1>
 
-    <form class="explore-form" action="/explore" method="GET">
+    <form class="explore-form" id="explore-form" action="/explore" method="GET">
       <div class="form-group">
         <label for="location">ZIP code:</label>
         <input
@@ -46,9 +46,11 @@
           value="<%= breed %>"
         />
       </div>
-
-      <button type="submit" class="btn">Search</button>
     </form>
+
+    <div class="explore-search-button-wrapper">
+      <button type="submit" form="explore-form" class="btn">Search</button>
+    </div>
 
     <% if (pets.length > 0) { %>
       <div class="explore-grid">

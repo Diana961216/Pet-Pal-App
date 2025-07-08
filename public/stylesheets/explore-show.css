@@ -156,3 +156,27 @@ h1, h2 {
 .pagination .btn:hover {
   background-color: #023e42;
 }
+
+.explore-search-button-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: -0.25rem;
+}
+
+.explore-search-button-wrapper .btn {
+  width: 180px;
+  height: 2.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #028090;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explore-search-button-wrapper .btn:hover {
+  background-color: #1A5E63;
+}

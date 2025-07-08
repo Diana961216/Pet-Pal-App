@@ -5,48 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/pets.css" />
     <link rel="stylesheet" href="/stylesheets/global.css" />
-    <title>Editing <%= pet.name%></title>
+    <title>Editing <%= pet.name %></title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Edit Pet: <%= pet.name %></h1>
-    <form action="/pets/<%= pet._id %>?_method=PUT" method="POST">
-      <label for="name">Name:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value="<%= pet.name %>"
-        required
-      />
 
-      <label for="breed">Breed:</label>
-      <input
-        type="text"
-        id="breed"
-        name="breed"
-        value="<%= pet.breed %>"
-        required
-      />
+    <h1 style="text-align: center; margin-top: 1rem">
+      Edit Pet: <%= pet.name %>
+    </h1>
 
-      <label for="age">Age:</label>
-      <input
-        type="number"
-        id="age"
-        name="age"
-        value="<%= pet.age %>"
-        required
-      />
-      <label for="gender">Gender:</label>
-      <input
-        type="text"
-        id="gender"
-        name="gender"
-        value="<%= pet.gender %>"
-        required
-      />
+    <div class="pet-form-container">
+      <form action="/pets/<%= pet._id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= pet.name %>"
+          required
+        />
 
-      <button type="submit">Update Pet</button>
-    </form>
+        <label for="breed">Breed:</label>
+        <input
+          type="text"
+          id="breed"
+          name="breed"
+          value="<%= pet.breed %>"
+          required
+        />
+
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          value="<%= pet.age %>"
+          required
+        />
+
+        <label for="gender">Gender:</label>
+        <input
+          type="text"
+          id="gender"
+          name="gender"
+          value="<%= pet.gender %>"
+          required
+        />
+
+        <button type="submit">Update Pet</button>
+      </form>
+    </div>
   </body>
 </html>

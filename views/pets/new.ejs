@@ -9,27 +9,37 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Add a new Pet</h1>
-    <form action="/pets" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Name" required />
 
-      <label for="breed">Breed:</label>
-      <input type="text" id="breed" name="breed" placeholder="Breed" required />
+    <h1 style="text-align: center; margin-top: 1rem">Add a new Pet</h1>
 
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age" placeholder="Age" required />
+    <div class="pet-form-container">
+      <form action="/pets" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Name" required />
 
-      <label for="gender">Gender:</label>
-      <input
-        type="text"
-        id="gender"
-        name="gender"
-        placeholder="Gender"
-        required
-      />
+        <label for="breed">Breed:</label>
+        <input
+          type="text"
+          id="breed"
+          name="breed"
+          placeholder="Breed"
+          required
+        />
 
-      <button type="submit">Add Pet</button>
-    </form>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" placeholder="Age" required />
+
+        <label for="gender">Gender:</label>
+        <input
+          type="text"
+          id="gender"
+          name="gender"
+          placeholder="Gender"
+          required
+        />
+
+        <button type="submit">Add Pet</button>
+      </form>
+    </div>
   </body>
 </html>

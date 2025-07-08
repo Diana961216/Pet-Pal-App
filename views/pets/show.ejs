@@ -9,32 +9,26 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1><%= pet.name %> - <%= pet.breed %></h1>
-    <p>Age: <%= pet.age %></p>
-    <p>Gender: <%= pet.gender %></p>
-    <p>Owner: <%= pet.owner.username %></p>
-    <a href="/pets/<%= pet._id %>/applications/new" class="btn secondary-btn"
-      >Apply to Adopt</a
-    >
-    <form
-      action="/pets/<%= pet._id %>/edit"
-      method="GET"
-      style="display: inline"
-    >
-      <button type="submit">Edit Pet</button>
-    </form>
-    <form
-      action="/pets/<%= pet._id %>?_method=DELETE"
-      method="POST"
-      style="display: inline"
-    >
-      <button type="submit">Delete Pet</button>
-    </form>
-    <p></p>
-    <% if (user && user._id !== pet.owner._id.toString()) { %>
-    <a href="/pets/<%= pet._id %>/applications/new" class="btn"
-      >Apply to Adopt</a
-    >
-    <% } %>
+
+    <div class="pet-show-card">
+      <h1><%= pet.name %></h1>
+      <p><strong>Breed:</strong> <%= pet.breed %></p>
+      <p><strong>Age:</strong> <%= pet.age %></p>
+      <p><strong>Gender:</strong> <%= pet.gender %></p>
+      <p><strong>Owner:</strong> <%= pet.owner.username %></p>
+
+      <div class="pet-show-buttons">
+        <a href="/pets/<%= pet._id %>/edit" class="btn secondary-btn">Edit</a>
+        <form action="/pets/<%= pet._id %>?_method=DELETE" method="POST">
+          <button
+            type="submit"
+            class="btn secondary-btn"
+            onclick="return confirm('Are you sure you want to delete this pet?')"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
