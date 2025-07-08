@@ -5,7 +5,6 @@ const Application = require('../models/application.js');
 const ApiApplication = require('../models/apiApplication.js');
 const isSignedIn = require('../middleware/is-signed-in.js');
 
-// Internal pet: show new application form
 router.get('/new', isSignedIn, async (req, res) => {
   try {
     const pet = await Pet.findById(req.params.petId);
@@ -17,7 +16,6 @@ router.get('/new', isSignedIn, async (req, res) => {
   }
 });
 
-// Internal pet: submit application
 router.post('/', isSignedIn, async (req, res) => {
   try {
     const newApp = new Application({
@@ -113,6 +111,24 @@ router.put('/api/:id', isSignedIn, async (req, res) => {
 
   req.flash('success', 'Application updated.');
   res.redirect(`/applications/api/${app._id}`);
+});
+
+router.delete('/api/:id', isSignedIn, async (req, res) => {
+  try {
+    const app = await ApiApplication.findById(req.params.id);
+    if (!app || app.user.toString() !== req.session.user._id.toString()) {
+      req.flash('error', 'Unauthorized.');
+      return res.redirect('/');
+    }
+
+    await app.deleteOne();
+    req.flash('success', 'Application deleted.');
+    res.redirect(`/users/${req.session.user._id}`);
+  } catch (err) {
+    console.error(err);
+    req.flash('error', 'Could not delete application.');
+    res.redirect('/');
+  }
 });
 
 module.exports = router;

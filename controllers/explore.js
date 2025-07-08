@@ -13,8 +13,9 @@ router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
 
     let url = `https://api.petfinder.com/v2/animals?location=${location}&distance=100&limit=24&page=${page}`;
+
     if (type) url += `&type=${type}`;
-    if (type && breed) url += `&breed=${encodeURIComponent(breed)}`;
+    if (breed) url += `&breed=${encodeURIComponent(breed)}`; // 🔧 FIXED: no longer depends on type
 
     const response = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` }
@@ -77,6 +78,16 @@ router.get('/:petId/adopt', isSignedIn, async (req, res) => {
 
 router.post('/:petId/adopt', isSignedIn, async (req, res) => {
   try {
+    const existing = await ApiApplication.findOne({
+      user: req.session.user._id,
+      petId: req.params.petId
+    });
+
+    if (existing) {
+      req.flash('error', 'You have already submitted an application for this pet.');
+      return res.redirect(`/explore/${req.params.petId}`);
+    }
+
     await ApiApplication.create({
       user: req.session.user._id,
       petId: req.params.petId,

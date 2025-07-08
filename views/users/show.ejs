@@ -11,36 +11,87 @@
     <%- include('../partials/_navbar') %>
 
     <h2>My Pets Listed for Adoption</h2>
-    <ul>
+    <% if (myPets.length === 0) { %>
+    <p class="empty-state">
+      You haven’t listed any pets yet. Add one to help them find a loving home!
+    </p>
+    <% } else { %>
+    <ul class="applications-list">
       <% myPets.forEach(pet => { %>
-      <li>
-        <a href="/pets/<%= pet._id %>"><%= pet.name %></a>
-        <a href="/pets/<%= pet._id %>/edit">(edit)</a>
+      <li class="application-card">
+        <p><strong><%= pet.name %></strong></p>
+
+        <div class="card-buttons">
+          <a href="/pets/<%= pet._id %>/edit" class="btn small-btn">Edit</a>
+
+          <form action="/pets/<%= pet._id %>?_method=DELETE" method="POST">
+            <button
+              class="btn small-btn secondary-btn"
+              onclick="return confirm('Are you sure you want to delete this pet?')"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
       </li>
       <% }) %>
     </ul>
+    <% } %>
 
     <h2>My Adoption Applications</h2>
-    <ul>
+    <% if (allApps.length === 0) { %>
+    <p class="empty-state">
+      You haven’t submitted any applications yet. When you find a pet you love,
+      let them know!
+    </p>
+    <% } else { %>
+    <ul class="applications-list">
       <% allApps.forEach(app => { %>
-      <li>
-        For
-        <a
-          href="<%= app.type === 'internal' ? '/pets/' + app.petId : '/explore/' + app.petId %>"
-        >
-          <%= app.petName %>
-        </a>
-        <% if (app.status) { %> — Status: <%= app.status %>
-        <a href="/pets/<%= app.petId %>/applications/<%= app.appId %>/edit"
-          >(edit or withdraw)</a
-        >
-        <% } else { %> — Sent: <%= app.date.toDateString() %>
-        <a href="/applications/api/<%= app._id %>/edit">(edit)</a>
+      <li class="application-card">
+        <p>
+          For
+          <a
+            href="<%= app.type === 'internal' ? '/pets/' + app.petId : '/explore/' + app.petId %>"
+          >
+            <%= app.petName %>
+          </a>
+        </p>
+
+        <% if (app.status) { %>
+        <p>Status: <%= app.status %></p>
+        <% } else { %>
+        <p>Sent: <%= app.date.toDateString() %></p>
         <% } %>
-        <br />
-        <strong>Your message:</strong> <%= app.message %>
+
+        <p><strong>Your message:</strong> <%= app.message %></p>
+
+        <div class="card-buttons">
+          <a
+            href="<%= app.type === 'internal'
+              ? '/pets/' + app.petId + '/applications/' + app.appId + '/edit'
+              : '/applications/api/' + app._id + '/edit' %>"
+            class="btn small-btn"
+          >
+            Edit
+          </a>
+
+          <form
+            action="<%= app.type === 'internal'
+              ? '/pets/' + app.petId + '/applications/' + app.appId + '?_method=DELETE'
+              : '/applications/api/' + app._id + '?_method=DELETE' %>"
+            method="POST"
+          >
+            <button
+              class="btn small-btn secondary-btn"
+              onclick="return confirm('Are you sure you want to delete this application?')"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
       </li>
       <% }) %>
     </ul>
+    <% } %>
   </body>
 </html>
