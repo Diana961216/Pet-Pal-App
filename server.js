@@ -53,17 +53,20 @@ app.use('/users', userController);
 
 app.get('/', async (req, res) => {
   let pets;
-  const { location, type } = req.query;
+  const { location, type, breed } = req.query;
 
-  if (location || type) {
-    pets = await getPets({ location: location || '33126', type });
+  if (location || type || breed) {
+    pets = await getPets({ location: location || '33126', type, breed });
   } else {
     pets = await getPets();
   }
 
   res.render('index.ejs', {
     user: req.session.user,
-    pets
+    pets,
+    location,
+    type,
+    breed
   });
 });
 

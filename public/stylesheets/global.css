@@ -1,32 +1,32 @@
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: #FCFFFD;
     color: #1A5E63;
+    font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-}
-
+  }
+  
 nav {
     background-color: #1A5E63;
     padding: 1rem 2rem;
-}
-
+  }
+  
 nav a {
     color: white;
-    text-decoration: none;
     margin-left: 1rem;
-}
-
+    text-decoration: none;
+  }
+  
 nav a:hover {
     text-decoration: underline;
-}
-
+  }
+  
 h1, h2, h3 {
     color: #1A5E63;
     text-align: center;
-}
-
-
+  }
+  
 .flash {
     padding: 1rem;
     margin: 1rem auto;
@@ -35,21 +35,20 @@ h1, h2, h3 {
     text-align: center;
     font-weight: 600;
     font-size: 1rem;
-}
-
+  }
+  
 .flash.success {
     background-color: #d4f4dd;
     color: #1a5e63;
     border: 1px solid #1a5e63;
-}
-
+  }
+  
 .flash.error {
     background-color: #fde0e0;
     color: #9b1c1c;
     border: 1px solid #9b1c1c;
-}
-
-
+  }
+  
 .btn {
     display: inline-block;
     padding: 0.6rem 1.2rem;
@@ -61,21 +60,81 @@ h1, h2, h3 {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
+  }
+  
 .btn:hover {
     background-color: #1A5E63;
-}
-
+  }
+  
 .secondary-btn {
     background-color: #C0FDFB;
     color: #1A5E63;
-}
-
+  }
+  
 .secondary-btn:hover {
     background-color: #b2fff3;
-}
+  }
+  
 .scroll-btn {
     font-size: 2rem;
     padding: 0.5rem 1rem;
-}         
+  }
+  
+.explore-form {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline; 
+    padding: 1.5rem 2rem 1rem 2rem;
+    margin-bottom: 2rem;
+    gap: 1.25rem; 
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+  
+.explore-form .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+  }
+  
+.explore-form label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+.explore-form input,
+.explore-form select {
+    height: 2.75rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #1A5E63;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+.search-button-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: -0.25rem;
+  }
+
+.search-button-wrapper .btn {
+    width: 180px;
+    height: 2.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #028090;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+.search-button-wrapper .btn:hover {
+    background-color: #1A5E63;
+  }
+  

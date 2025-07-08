@@ -22,40 +22,53 @@
       <h1>Welcome back, <%= user.username %>!</h1>
       <p>Ready to explore new pets today?</p>
       <a href="/pets" class="btn">View My Pets</a>
-      <a href="/users/<%= user._id %>" class="btn secondary-btn"
-        >Your Profile</a
-      >
+      <a href="/users/<%= user._id %>" class="btn secondary-btn">Your Profile</a>
       <% } %>
     </div>
 
     <h2 class="adopt">Adoptable Pets Near You</h2>
 
-    <form class="filter-form" action="/" method="GET">
-      <div class="form-group" id="location">
+    <form class="explore-form" action="/" method="GET">
+      <div class="form-group">
         <label for="location">ZIP code:</label>
         <input
           type="number"
           id="location"
           name="location"
           placeholder="e.g. 33126"
+          value="<%= location || '' %>"
           min="0"
           step="1"
           oninput="this.value = this.value.slice(0, 5);"
         />
       </div>
 
-      <div class="form-group" id="type">
+      <div class="form-group">
         <label for="type">Type of pet:</label>
         <select id="type" name="type">
           <option value="">Any</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="rabbit">Rabbit</option>
+          <option value="dog" <%= type === 'dog' ? 'selected' : '' %>>Dog</option>
+          <option value="cat" <%= type === 'cat' ? 'selected' : '' %>>Cat</option>
+          <option value="rabbit" <%= type === 'rabbit' ? 'selected' : '' %>>Rabbit</option>
         </select>
       </div>
 
-      <button type="submit" class="btn">Search</button>
+      <div class="form-group">
+        <label for="breed">Breed:</label>
+        <input
+          type="text"
+          id="breed"
+          name="breed"
+          placeholder="e.g. Labrador"
+          value="<%= breed || '' %>"
+        />
+      </div>
     </form>
+
+    <!-- Search button centered below form -->
+    <div class="search-button-wrapper">
+      <button type="submit" form="search-form" class="btn">Search</button>
+    </div>
 
     <div class="scroll-wrapper">
       <button
@@ -68,26 +81,25 @@
 
       <div class="scroll-container">
         <ul>
-          <% pets.forEach(pet => { %> <% if (pet.photos && pet.photos.length) {
-          %>
-          <li>
-            <strong><%= pet.name %></strong>
-            (<%= pet.breeds?.primary || 'Unknown' %>, <%= pet.age %>, <%=
-            pet.gender %>)
-            <img
-              src="<%= pet.photos[0].medium %>"
-              alt="Photo of <%= pet.name %>"
-            />
-            <div class="card-buttons">
-              <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
-              <a
-                href="/explore/<%= pet.id %>/adopt"
-                class="btn secondary-btn small-btn"
-                >I want to adopt</a
-              >
-            </div>
-          </li>
-          <% } %> <% }) %>
+          <% pets.forEach(pet => { %>
+            <% if (pet.photos && pet.photos.length) { %>
+              <li>
+                <strong><%= pet.name %></strong>
+                (<%= pet.breeds?.primary || 'Unknown' %>, <%= pet.age %>, <%= pet.gender %>)
+                <img
+                  src="<%= pet.photos[0].medium %>"
+                  alt="Photo of <%= pet.name %>"
+                />
+                <div class="card-buttons">
+                  <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
+                  <a
+                    href="/explore/<%= pet.id %>/adopt"
+                    class="btn secondary-btn small-btn"
+                  >I want to adopt</a>
+                </div>
+              </li>
+            <% } %>
+          <% }) %>
         </ul>
       </div>
 
