@@ -16,13 +16,13 @@
 
     <div class="landing-container">
       <% if (!user) { %>
-      <h1>Welcome to PetPal!</h1>
-      <p>Your place to find and adopt loving pets.</p>
+        <h1>Welcome to PetPal!</h1>
+        <p>Your place to find and adopt loving pets.</p>
       <% } else { %>
-      <h1>Welcome back, <%= user.username %>!</h1>
-      <p>Ready to explore new pets today?</p>
-      <a href="/pets" class="btn">View My Pets</a>
-      <a href="/users/<%= user._id %>" class="btn secondary-btn">Your Profile</a>
+        <h1>Welcome back<%= user && user.email ? ', ' + user.email : '' %>!</h1>
+        <p>Ready to explore new pets today?</p>
+        <a href="/pets" class="btn">View My Pets</a>
+        <a href="/users/<%= user._id %>" class="btn secondary-btn">Your Profile</a>
       <% } %>
     </div>
 
@@ -65,7 +65,6 @@
       </div>
     </form>
 
-    <!-- Search button centered below form -->
     <div class="search-button-wrapper">
       <button type="submit" form="search-form" class="btn">Search</button>
     </div>

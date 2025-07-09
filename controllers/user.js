@@ -7,10 +7,14 @@ const ApiApplication = require('../models/apiApplication');
 const bcrypt = require('bcrypt');
 const isSignedIn = require('../middleware/is-signed-in.js');
 
+
 router.get('/:userId', isSignedIn, async (req, res) => {
   if (req.session.user._id !== req.params.userId) return res.redirect('/');
+  
   const currentUser = await User.findById(req.params.userId);
-  const myPets = await Pet.find({ owner: currentUser._id });
+
+  const myPets = await Pet.find({ owner: req.session.user._id });
+
   const myApps = await Application.find({ user: currentUser._id }).populate('pet');
   const myApiApps = await ApiApplication.find({ user: currentUser._id });
 
@@ -30,7 +34,7 @@ router.get('/:userId', isSignedIn, async (req, res) => {
       petId: app.petId,
       message: app.message,
       date: app.createdAt,
-      _id: app._id // ✅ Required for edit URL
+      _id: app._id
     }))
   ];
 
@@ -41,18 +45,19 @@ router.get('/:userId', isSignedIn, async (req, res) => {
   });
 });
 
+
 router.get('/:userId/edit', isSignedIn, async (req, res) => {
   if (req.session.user._id !== req.params.userId) return res.redirect('/');
   const user = await User.findById(req.params.userId);
   res.render('users/edit.ejs', { user });
 });
 
+
 router.put('/:userId', isSignedIn, async (req, res) => {
   if (req.session.user._id !== req.params.userId) return res.redirect('/');
   const user = await User.findById(req.params.userId);
 
-  user.username = req.body.username || user.username;
-
+  if (req.body.email) user.email = req.body.email.toLowerCase();
   if (req.body.password) {
     user.password = bcrypt.hashSync(req.body.password, 10);
   }
@@ -60,6 +65,7 @@ router.put('/:userId', isSignedIn, async (req, res) => {
   await user.save();
   res.redirect(`/users/${user._id}`);
 });
+
 
 router.delete('/:userId', isSignedIn, async (req, res) => {
   if (req.session.user._id !== req.params.userId) return res.redirect('/');

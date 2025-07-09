@@ -10,6 +10,8 @@
   <body>
     <%- include('../partials/_navbar') %>
 
+    <h2>Welcome, <%= user.email %></h2>
+
     <h2>My Pets Listed for Adoption</h2>
     <% if (myPets.length === 0) { %>
     <p class="empty-state">
@@ -20,10 +22,8 @@
       <% myPets.forEach(pet => { %>
       <li class="application-card">
         <p><strong><%= pet.name %></strong></p>
-
         <div class="card-buttons">
           <a href="/pets/<%= pet._id %>/edit" class="btn small-btn">Edit</a>
-
           <form action="/pets/<%= pet._id %>?_method=DELETE" method="POST">
             <button
               class="btn small-btn secondary-btn"
@@ -68,8 +68,8 @@
         <div class="card-buttons">
           <a
             href="<%= app.type === 'internal'
-              ? '/pets/' + app.petId + '/applications/' + app.appId + '/edit'
-              : '/applications/api/' + app._id + '/edit' %>"
+                  ? '/pets/' + app.petId + '/applications/' + app.appId + '/edit'
+                  : '/applications/api/' + app._id + '/edit' %>"
             class="btn small-btn"
           >
             Edit
@@ -77,8 +77,8 @@
 
           <form
             action="<%= app.type === 'internal'
-              ? '/pets/' + app.petId + '/applications/' + app.appId + '?_method=DELETE'
-              : '/applications/api/' + app._id + '?_method=DELETE' %>"
+                  ? '/pets/' + app.petId + '/applications/' + app.appId + '?_method=DELETE'
+                  : '/applications/api/' + app._id + '?_method=DELETE' %>"
             method="POST"
           >
             <button
