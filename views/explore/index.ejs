@@ -15,15 +15,7 @@
     <form class="explore-form" id="explore-form" action="/explore" method="GET">
       <div class="form-group">
         <label for="location">ZIP code:</label>
-        <input
-          type="number"
-          id="location"
-          name="location"
-          placeholder="e.g. 33126"
-          value="<%= location %>"
-          min="0"
-          step="1"
-        />
+        <input type="number" id="location" name="location" placeholder="e.g. 33126" value="<%= location %>" />
       </div>
 
       <div class="form-group">
@@ -38,13 +30,7 @@
 
       <div class="form-group">
         <label for="breed">Breed:</label>
-        <input
-          type="text"
-          id="breed"
-          name="breed"
-          placeholder="e.g. Labrador"
-          value="<%= breed %>"
-        />
+        <input type="text" id="breed" name="breed" placeholder="e.g. Labrador" value="<%= breed %>" />
       </div>
     </form>
 
@@ -55,7 +41,19 @@
     <% if (pets.length > 0) { %>
       <div class="explore-grid">
         <% pets.forEach(pet => { %>
-          <% if (pet.photos && pet.photos.length) { %>
+          <% if (pet.isInternal) { %>
+            <!-- Internal DB pet -->
+            <div class="explore-card">
+              <h2><%= pet.name %></h2>
+              <p><%= pet.breed %> - <%= pet.age %> - <%= pet.gender %></p>
+              <p>Posted by: <%= pet.owner?.email || 'Unknown' %></p>
+              <div class="card-buttons">
+                <a href="/pets/<%= pet._id %>" class="btn small-btn">View</a>
+                <a href="/pets/<%= pet._id %>/applications/new" class="btn small-btn secondary-btn">I want to adopt</a>
+              </div>
+            </div>
+          <% } else if (pet.photos && pet.photos.length) { %>
+            <!-- Petfinder API pet -->
             <div class="explore-card">
               <h2><%= pet.name %></h2>
               <p><%= pet.breeds?.primary || 'Unknown' %> - <%= pet.age %> - <%= pet.gender %></p>

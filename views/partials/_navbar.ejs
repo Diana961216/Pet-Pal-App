@@ -1,16 +1,39 @@
 <nav>
-  <a href="/">Home</a>
-  <a href="/explore">Explore</a>
+  <div style="display: flex; align-items: center; gap: 1rem">
+    <a
+      href="/"
+      style="display: flex; align-items: center; text-decoration: none"
+    >
+      <img
+        src="/images/petpal-logo.png"
+        alt="PetPal Logo"
+        style="height: 40px"
+      />
+      <span
+        style="
+          color: white;
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-left: 0.5rem;
+        "
+        >PetPal</span
+      >
+    </a>
+  </div>
 
-  <% if (user) { %>
-  <a href="/pets">My Pets</a>
-  <a href="/pets/new">Add Pet</a>
-  <a href="/users/<%= user._id %>">My Dashboard</a>
-  <a href="/auth/sign-out">Sign Out</a>
-  <% } else { %>
-  <a href="/auth/sign-in">Sign In</a>
-  <a href="/auth/sign-up">Sign Up</a>
-  <% } %>
+  <div>
+    <a href="/">Home</a>
+    <a href="/explore">Explore</a>
+    <% if (user) { %>
+    <a href="/pets">My Pets</a>
+    <a href="/pets/new">Add Pet</a>
+    <a href="/users/<%= user._id %>">My Dashboard</a>
+    <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+    <a href="/auth/sign-in">Sign In</a>
+    <a href="/auth/sign-up">Sign Up</a>
+    <% } %>
+  </div>
 </nav>
 
 <% if (success && success.length > 0) { %>

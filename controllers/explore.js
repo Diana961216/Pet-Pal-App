@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Pet = require('../models/pet'); 
 const { getPetfinderToken } = require('../utils/getPetFinderToken');
 const ApiApplication = require('../models/apiApplication');
 const isSignedIn = require('../middleware/is-signed-in');
@@ -7,30 +8,40 @@ const isSignedIn = require('../middleware/is-signed-in');
 router.get('/', async (req, res) => {
   try {
     const token = await getPetfinderToken();
-    const type = req.query.type || '';
-    const location = req.query.location || '33126';
-    const breed = req.query.breed || '';
-    const page = parseInt(req.query.page) || 1;
+    const { type = '', location = '33126', breed = '', page = 1 } = req.query;
 
     let url = `https://api.petfinder.com/v2/animals?location=${location}&distance=100&limit=24&page=${page}`;
-
     if (type) url += `&type=${type}`;
-    if (breed) url += `&breed=${encodeURIComponent(breed)}`; // 🔧 FIXED: no longer depends on type
+    if (breed) url += `&breed=${encodeURIComponent(breed)}`;
 
-    const response = await fetch(url, {
+    const petfinderResponse = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` }
     });
+    const petfinderData = await petfinderResponse.json();
+    const apiPets = petfinderData.animals || [];
 
-    const data = await response.json();
+    const dbPets = await Pet.find(
+      req.session.user
+        ? { owner: { $ne: req.session.user._id } }
+        : {}
+    ).populate('owner');
+
+    
+    const internalPets = dbPets.map(p => ({
+      ...p.toObject(),
+      isInternal: true
+    }));
+
+    const allPets = [...apiPets, ...internalPets];
 
     res.render('explore/index.ejs', {
-      pets: data.animals || [],
+      pets: allPets,
       user: req.session.user,
       type,
       location,
       breed,
-      currentPage: page,
-      totalPages: data.pagination?.total_pages || 1
+      currentPage: parseInt(page),
+      totalPages: petfinderData.pagination?.total_pages || 1
     });
   } catch (err) {
     console.error(err);
