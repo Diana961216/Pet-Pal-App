@@ -8,7 +8,7 @@ router.get('/sign-up', (req, res) => {
 });
 
 router.post('/sign-up', async (req, res) => {
-  const { email, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword, name } = req.body;
 
   if (!email || !password || !confirmPassword) {
     req.flash('error', 'All fields are required.');
@@ -27,7 +27,7 @@ router.post('/sign-up', async (req, res) => {
   }
 
   const hashedPassword = bcrypt.hashSync(password, 10);
-  await User.create({ email: email.toLowerCase(), password: hashedPassword });
+  await User.create({ email: email.toLowerCase(), password: hashedPassword, name });
 
   req.flash('success', 'Account created! Please sign in.');
   res.redirect('/auth/sign-in');
@@ -54,7 +54,8 @@ router.post('/sign-in', async (req, res) => {
 
   req.session.user = {
     _id: user._id,
-    email: user.email
+    email: user.email,
+    name: user.name
   };
 
   req.flash('success', 'You are now signed in.');

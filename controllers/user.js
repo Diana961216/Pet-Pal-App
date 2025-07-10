@@ -57,6 +57,7 @@ router.put('/:userId', isSignedIn, async (req, res) => {
   if (req.session.user._id !== req.params.userId) return res.redirect('/');
   const user = await User.findById(req.params.userId);
 
+  if (req.body.name) user.name = req.body.name;
   if (req.body.email) user.email = req.body.email.toLowerCase();
   if (req.body.password) {
     user.password = bcrypt.hashSync(req.body.password, 10);

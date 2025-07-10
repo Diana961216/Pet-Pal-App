@@ -19,7 +19,7 @@
         <h1>Welcome to PetPal!</h1>
         <p>Your place to find and adopt loving pets.</p>
       <% } else { %>
-        <h1>Welcome back<%= user && user.email ? ', ' + user.email : '' %>!</h1>
+        <h1>Welcome back<%= user.name ? ', ' + user.name : '' %>!</h1>
         <p>Ready to explore new pets today?</p>
         <a href="/pets" class="btn">View My Pets</a>
         <a href="/users/<%= user._id %>" class="btn secondary-btn">Your Profile</a>

@@ -10,7 +10,12 @@
   <body>
     <%- include('../partials/_navbar') %>
 
-    <h2>Welcome, <%= user.email %></h2>
+    <h2>Welcome, <%= user.name || user.email %></h2>
+    <div style="text-align: center; margin-bottom: 2rem">
+      <a href="/users/<%= user._id %>/edit" class="btn small-btn"
+        >Edit Profile</a
+      >
+    </div>
 
     <h2>My Pets Listed for Adoption</h2>
     <% if (myPets.length === 0) { %>
