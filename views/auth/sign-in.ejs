@@ -8,15 +8,23 @@
     <title>Sign In</title>
   </head>
   <body>
-    <h1>Sign in</h1>
-    <form action="/auth/sign-in" method="POST">
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required />
+    <div class="auth-wrapper">
+      <h1 class="auth-heading">Sign in</h1>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required />
+      <form action="/auth/sign-in" method="POST" class="auth-form">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required />
 
-      <button type="submit">Sign in</button>
-    </form>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required />
+
+        <button type="submit">Sign in</button>
+      </form>
+
+      <div class="signup-link-wrapper">
+        <p>Don’t have an account?</p>
+        <a href="/auth/sign-up" class="btn secondary-btn">Create one</a>
+      </div>
+    </div>
   </body>
 </html>

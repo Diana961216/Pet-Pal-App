@@ -8,26 +8,29 @@
     <title>Sign Up</title>
   </head>
   <body>
-    <h1>Create a new account!</h1>
-    <form action="/auth/sign-up" method="POST">
-      <label for="name">Your Name:</label>
-      <input type="text" name="name" id="name" required />
+    <div class="auth-wrapper">
+      <h1 class="auth-heading">Create a new account!</h1>
 
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required />
+      <form action="/auth/sign-up" method="POST" class="auth-form">
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" id="name" required />
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required />
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required />
 
-      <label for="confirmPassword">Confirm Password:</label>
-      <input
-        type="password"
-        name="confirmPassword"
-        id="confirmPassword"
-        required
-      />
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required />
 
-      <button type="submit">Sign up</button>
-    </form>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          required
+        />
+
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
   </body>
 </html>

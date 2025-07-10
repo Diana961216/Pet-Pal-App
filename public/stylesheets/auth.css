@@ -7,34 +7,42 @@ body {
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; 
   height: 100vh;
 }
 
-form {
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 3rem;
+  width: 100%;
+}
+
+.auth-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #1A5E63;
+}
+
+.auth-form {
   background: white;
   border: 2px solid #C0FDFB;
   border-radius: 8px;
   padding: 2rem;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30rem;
-  color: #1A5E63;
-  position: absolute;
-}
-
-label {
+.auth-form label {
   display: block;
   margin-top: 1rem;
   font-weight: 600;
 }
 
-input {
+.auth-form input {
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.25rem;
@@ -43,7 +51,7 @@ input {
   font-size: 1rem;
 }
 
-button {
+.auth-form button {
   width: 100%;
   margin-top: 1.5rem;
   padding: 0.75rem;
@@ -55,6 +63,22 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.auth-form button:hover {
   background-color: #1A5E63;
+}
+
+.signup-link-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.signup-link-wrapper p {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1A5E63;
+}
+
+.signup-link-wrapper .btn {
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
 }
