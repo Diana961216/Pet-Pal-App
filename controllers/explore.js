@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Pet = require('../models/pet'); 
+const Pet = require('../models/pet');
 const { getPetfinderToken } = require('../utils/getPetFinderToken');
 const ApiApplication = require('../models/apiApplication');
 const isSignedIn = require('../middleware/is-signed-in');
@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
         : {}
     ).populate('owner');
 
-    
     const internalPets = dbPets.map(p => ({
       ...p.toObject(),
       isInternal: true
@@ -55,12 +54,19 @@ router.get('/:petId', async (req, res) => {
     const response = await fetch(`https://api.petfinder.com/v2/animals/${req.params.petId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
+
     const data = await response.json();
     const pet = data.animal;
+
+    if (!pet) {
+      req.flash('error', 'Pet not found or no longer available.');
+      return res.redirect('/explore');
+    }
 
     res.render('explore/show.ejs', { pet, user: req.session.user });
   } catch (err) {
     console.error(err);
+    req.flash('error', 'Something went wrong.');
     res.redirect('/explore');
   }
 });
