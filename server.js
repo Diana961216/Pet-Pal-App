@@ -16,6 +16,7 @@ const getPets = require('./utils/getPets.js');
 const userController = require('./controllers/user.js');
 const authController = require('./controllers/auth.js');
 const isOwner = require('./middleware/is-owner.js');
+const {getBreeds} = require('./utils/getBreeds.js');
 
 const port = process.env.PORT || 3000;
 
@@ -47,27 +48,32 @@ app.use(passUserToView);
 app.use('/auth', authController);
 app.use('/pets', isSignedIn, require('./controllers/pet.js'));
 app.use('/explore', require('./controllers/explore.js'));
-app.use('/pets/:petId/applications', require('./controllers/application.js')); // Internal pet applications
-app.use('/applications', require('./controllers/application.js')); // API applications
-app.use('/users', userController);
+app.use('/pets/:petId/applications', require('./controllers/application.js')); 
+app.use('/applications', require('./controllers/application.js')); 
 
 app.get('/', async (req, res) => {
-  let pets;
-  const { location, type, breed } = req.query;
-
-  if (location || type || breed) {
-    pets = await getPets({ location: location || '33126', type, breed });
-  } else {
-    pets = await getPets();
-  }
+  const { location, type = '', breed = '' } = req.query;
+  const pets = await getPets({ location, type, breed });
+  const breeds = type ? await getBreeds(type) : [];
 
   res.render('index.ejs', {
     user: req.session.user,
     pets,
     location,
     type,
-    breed
+    breed,
+    breeds
   });
+});
+
+app.get('/api/breeds/:type', async (req, res) => {
+  try {
+    const breeds = await getBreeds(req.params.type);
+    res.json(breeds);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json([]);
+  }
 });
 
 app.listen(port, () => {

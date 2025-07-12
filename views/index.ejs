@@ -54,14 +54,17 @@
       </div>
 
       <div class="form-group">
-        <label for="breed">Breed:</label>
-        <input
-          type="text"
-          id="breed"
-          name="breed"
-          placeholder="e.g. Labrador"
-          value="<%= breed || '' %>"
-        />
+        <label for="breed">Breed:
+          <% if (!type) { %>
+            <span style="font-size: 0.8rem; color: #888">(Select a type first)</span>
+          <% } %>
+        </label>
+        <select id="breed" name="breed" <%= !type ? 'disabled' : '' %>>
+          <option value="">Any</option>
+          <% breeds.forEach(b => { %>
+            <option value="<%= b %>" <%= breed === b ? 'selected' : '' %>><%= b %></option>
+          <% }) %>
+        </select>
       </div>
     </form>
 
@@ -123,6 +126,41 @@
       function stopScroll() {
         clearInterval(scrollInterval);
       }
+
+      const typeSelect = document.getElementById('type');
+      const breedSelect = document.getElementById('breed');
+
+      async function fetchBreeds(type) {
+        breedSelect.innerHTML = '<option value="">Loading...</option>';
+        breedSelect.disabled = true;
+
+        try {
+          const res = await fetch(`/api/breeds/${type}`);
+          const breeds = await res.json();
+
+          breedSelect.innerHTML = '<option value="">Any</option>';
+          breeds.forEach(breed => {
+            const option = document.createElement('option');
+            option.value = breed;
+            option.textContent = breed;
+            breedSelect.appendChild(option);
+          });
+
+          breedSelect.disabled = false;
+        } catch (err) {
+          breedSelect.innerHTML = '<option value="">Failed to load breeds</option>';
+        }
+      }
+
+      typeSelect?.addEventListener('change', () => {
+        const selectedType = typeSelect.value;
+        if (selectedType) {
+          fetchBreeds(selectedType);
+        } else {
+          breedSelect.innerHTML = '<option value="">Any</option>';
+          breedSelect.disabled = true;
+        }
+      });
     </script>
   </body>
 </html>

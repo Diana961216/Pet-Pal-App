@@ -2,45 +2,39 @@ const express = require('express');
 const router = express.Router();
 const Pet = require('../models/pet');
 const { getPetfinderToken } = require('../utils/getPetFinderToken');
+const { getBreeds } = require('../utils/getBreeds');
 const ApiApplication = require('../models/apiApplication');
 const isSignedIn = require('../middleware/is-signed-in');
 
 router.get('/', async (req, res) => {
   try {
-    const token = await getPetfinderToken();
     const { type = '', location = '33126', breed = '', page = 1 } = req.query;
+    const breeds = type ? await getBreeds(type) : [];
 
+    const token = await getPetfinderToken();
     let url = `https://api.petfinder.com/v2/animals?location=${location}&distance=100&limit=24&page=${page}`;
     if (type) url += `&type=${type}`;
     if (breed) url += `&breed=${encodeURIComponent(breed)}`;
 
-    const petfinderResponse = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const petfinderData = await petfinderResponse.json();
-    const apiPets = petfinderData.animals || [];
+    const pfRes = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    const pfData = await pfRes.json();
+    const apiPets = pfData.animals || [];
 
     const dbPets = await Pet.find(
-      req.session.user
-        ? { owner: { $ne: req.session.user._id } }
-        : {}
+      req.session.user ? { owner: { $ne: req.session.user._id } } : {}
     ).populate('owner');
 
-    const internalPets = dbPets.map(p => ({
-      ...p.toObject(),
-      isInternal: true
-    }));
+    const internalPets = dbPets.map(p => ({ ...p.toObject(), isInternal: true }));
 
-    const allPets = [...apiPets, ...internalPets];
-
-    res.render('explore/index.ejs', {
-      pets: allPets,
+    res.render('explore/index', {
+      pets: [...apiPets, ...internalPets],
       user: req.session.user,
       type,
       location,
       breed,
+      breeds,
       currentPage: parseInt(page),
-      totalPages: petfinderData.pagination?.total_pages || 1
+      totalPages: pfData.pagination?.total_pages || 1
     });
   } catch (err) {
     console.error(err);
