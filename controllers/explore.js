@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 
     const internalPets = dbPets.map(p => ({ ...p.toObject(), isInternal: true }));
 
-    res.render('explore/index', {
+    res.render('explore/index.ejs', {
       pets: [...apiPets, ...internalPets],
       user: req.session.user,
       type,

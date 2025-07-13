@@ -141,7 +141,13 @@ li img {
 
 #location {
   height: 2.5rem;
-  width: 12rem;
+  width: 10rem;
+  margin-bottom: 30px;
+}
+
+#breed {
+  height: 2.5rem;
+  width: 10rem;
   margin-bottom: 30px;
 }
 
@@ -191,3 +197,5 @@ li img {
   padding: 0.4rem 1rem;
   border-radius: 5px;
 }
+
+
