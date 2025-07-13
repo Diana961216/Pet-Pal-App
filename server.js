@@ -46,6 +46,7 @@ app.use(flash());
 app.use(passUserToView);
 
 app.use('/auth', authController);
+app.use('/users', isSignedIn, userController);
 app.use('/pets', isSignedIn, require('./controllers/pet.js'));
 app.use('/explore', require('./controllers/explore.js'));
 app.use('/pets/:petId/applications', require('./controllers/application.js')); 

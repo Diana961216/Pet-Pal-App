@@ -180,3 +180,9 @@ h1, h2 {
 .explore-search-button-wrapper .btn:hover {
   background-color: #1A5E63;
 }
+
+.explore-form .form-group:last-child button {
+  width: 180px;
+  height: 2.75rem;
+}
+
