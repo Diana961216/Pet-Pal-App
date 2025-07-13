@@ -86,6 +86,11 @@
           <% pets.forEach(pet => { %>
             <% if (pet.photos && pet.photos.length) { %>
               <li>
+                <% if (user) { %>
+                  <form action="/favorites/api/<%= pet.id %>" method="POST" class="favorite-form">
+                    <button type="submit" class="favorite-icon <%= user.favoritesApi?.includes(pet.id) ? 'filled' : '' %>"></button>
+                  </form>
+                <% } %>
                 <strong><%= pet.name %></strong>
                 (<%= pet.breeds?.primary || 'Unknown' %>, <%= pet.age %>, <%= pet.gender %>)
                 <img

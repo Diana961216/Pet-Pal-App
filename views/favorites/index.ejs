@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/favorites.css" />
+    <title>Your Favorite Pets</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <div class="favorites-container">
+      <h1 class="favorites-heading">Your Favorite Pets</h1>
+
+      <% if (internalFavorites.length === 0 && apiFavorites.length === 0) { %>
+      <p style="margin-top: 2rem">You haven’t favorited any pets yet.</p>
+      <% } %>
+
+      <div class="favorites-grid">
+        <% internalFavorites.forEach(pet => { %>
+        <div class="favorite-card">
+          <h2><%= pet.name %></h2>
+          <p><%= pet.breed %> - <%= pet.age %> - <%= pet.gender %></p>
+          <div class="card-buttons">
+            <a href="/pets/<%= pet._id %>" class="btn small-btn">View</a>
+            <form
+              action="/favorites/internal/<%= pet._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn small-btn">Remove</button>
+            </form>
+          </div>
+        </div>
+        <% }) %> <% apiFavorites.forEach(pet => { %>
+        <div class="favorite-card">
+          <h2><%= pet.name %></h2>
+          <p>
+            <%= pet.breeds?.primary || 'Unknown' %> - <%= pet.age %> - <%=
+            pet.gender %>
+          </p>
+          <% if (pet.photos && pet.photos.length) { %>
+          <img
+            src="<%= pet.photos[0].medium %>"
+            alt="Photo of <%= pet.name %>"
+          />
+          <% } %>
+          <div class="card-buttons">
+            <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
+            <form
+              action="/favorites/api/<%= pet.id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn small-btn">Remove</button>
+            </form>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

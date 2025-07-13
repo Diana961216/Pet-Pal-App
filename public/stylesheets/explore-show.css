@@ -186,3 +186,28 @@ h1, h2 {
   height: 2.75rem;
 }
 
+.favorite-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  background-image: url('/images/heart-outline.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 3;
+}
+
+.favorite-icon.filled {
+  background-image: url('/images/heart-filled.png');
+}
+
+.explore-card {
+  position: relative;
+}
+

@@ -16,8 +16,9 @@
           font-weight: 600;
           margin-left: 0.5rem;
         "
-        >PetPal</span
       >
+        PetPal
+      </span>
     </a>
   </div>
 
@@ -25,6 +26,7 @@
     <a href="/">Home</a>
     <a href="/explore">Explore</a>
     <% if (user) { %>
+    <a href="/favorites">Favorites</a>
     <a href="/pets">My Pets</a>
     <a href="/pets/new">Add Pet</a>
     <a href="/users/<%= user._id %>">My Dashboard</a>

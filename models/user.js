@@ -15,7 +15,13 @@ const userSchema = mongoose.Schema({
   name: {
     type: String,
     trim: true
-  }
+  },
+  favorites: [
+    {
+      petId: String,
+      type: { type: String, enum: ['internal', 'api'] }
+    }
+  ]
 });
 
 const User = mongoose.model('User', userSchema);
