@@ -87,9 +87,12 @@
             <% if (pet.photos && pet.photos.length) { %>
               <li>
                 <% if (user) { %>
-                  <form action="/favorites/api/<%= pet.id %>" method="POST" class="favorite-form">
-                    <button type="submit" class="favorite-icon <%= user.favoritesApi?.includes(pet.id) ? 'filled' : '' %>"></button>
-                  </form>
+                  <button
+                    type="button"
+                    class="favorite-icon <%= user.favoritesApi?.includes(pet.id) ? 'filled' : '' %>"
+                    data-pet-id="<%= pet.id %>"
+                    data-type="api"
+                  ></button>
                 <% } %>
                 <strong><%= pet.name %></strong>
                 (<%= pet.breeds?.primary || 'Unknown' %>, <%= pet.age %>, <%= pet.gender %>)
@@ -165,6 +168,25 @@
           breedSelect.innerHTML = '<option value="">Any</option>';
           breedSelect.disabled = true;
         }
+      });
+
+      document.querySelectorAll('.favorite-icon').forEach(button => {
+        button.addEventListener('click', async () => {
+          const petId = button.dataset.petId;
+          const type = button.dataset.type;
+          const isFavorited = button.classList.contains('filled');
+
+          const method = isFavorited ? 'DELETE' : 'POST';
+
+          try {
+            const res = await fetch(`/favorites/${type}/${petId}`, { method });
+            if (res.ok) {
+              button.classList.toggle('filled');
+            }
+          } catch (err) {
+            console.error('Favorite toggle failed:', err);
+          }
+        });
       });
     </script>
   </body>

@@ -64,7 +64,9 @@ app.get('/', async (req, res) => {
   if (user) {
     const dbUser = await User.findById(user._id).lean();
     user = {
-      ...user,
+      _id: dbUser._id,
+      email: dbUser.email,
+      name: dbUser.name,
       favoritesApi: dbUser.favorites
         .filter(f => f.type === 'api')
         .map(f => f.petId),

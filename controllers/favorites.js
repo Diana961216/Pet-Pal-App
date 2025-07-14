@@ -13,6 +13,11 @@ router.post('/:type/:petId', isSignedIn, async (req, res) => {
   if (!exists) {
     user.favorites.push({ petId, type });
     await user.save();
+    req.session.user = {
+      _id: user._id,
+      email: user.email,
+      name: user.name
+    };
   }
 
   req.flash('success', 'Pet added to favorites!');

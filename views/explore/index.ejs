@@ -59,15 +59,17 @@
         <% pets.forEach(pet => { %>
           <% if (pet.isInternal) { %>
             <div class="explore-card">
+              <% if (user) { %>
+                <button
+                  type="button"
+                  class="favorite-icon <%= user.favoritesInternal?.includes(pet._id.toString()) ? 'filled' : '' %>"
+                  data-pet-id="<%= pet._id %>"
+                  data-type="internal"
+                ></button>
+              <% } %>
               <h2><%= pet.name %></h2>
               <p><%= pet.breed %> - <%= pet.age %> - <%= pet.gender %></p>
               <p>Posted by: <%= pet.owner?.email || 'Unknown' %></p>
-
-              <% if (user) { %>
-                <form action="/favorites/internal/<%= pet._id %>" method="POST" class="favorite-form">
-                  <button type="submit" class="favorite-icon <%= user.favoritesInternal?.includes(pet._id.toString()) ? 'filled' : '' %>"></button>
-                </form>
-              <% } %>
 
               <div class="card-buttons">
                 <a href="/pets/<%= pet._id %>" class="btn small-btn">View</a>
@@ -76,15 +78,17 @@
             </div>
           <% } else if (pet.photos && pet.photos.length) { %>
             <div class="explore-card">
+              <% if (user) { %>
+                <button
+                  type="button"
+                  class="favorite-icon <%= user.favoritesApi?.includes(pet.id) ? 'filled' : '' %>"
+                  data-pet-id="<%= pet.id %>"
+                  data-type="api"
+                ></button>
+              <% } %>
               <h2><%= pet.name %></h2>
               <p><%= pet.breeds?.primary || 'Unknown' %> - <%= pet.age %> - <%= pet.gender %></p>
               <img src="<%= pet.photos[0].medium %>" alt="Photo of <%= pet.name %>" />
-
-              <% if (user) { %>
-                <form action="/favorites/api/<%= pet.id %>" method="POST" class="favorite-form">
-                  <button type="submit" class="favorite-icon <%= user.favoritesApi?.includes(pet.id) ? 'filled' : '' %>"></button>
-                </form>
-              <% } %>
 
               <div class="card-buttons">
                 <a href="/explore/<%= pet.id %>" class="btn small-btn">View</a>
@@ -147,6 +151,25 @@
           breedSelect.innerHTML = '<option value="">Any</option>';
           breedSelect.disabled = true;
         }
+      });
+
+      document.querySelectorAll('.favorite-icon').forEach(button => {
+        button.addEventListener('click', async () => {
+          const petId = button.dataset.petId;
+          const type = button.dataset.type;
+          const isFavorited = button.classList.contains('filled');
+
+          const method = isFavorited ? 'DELETE' : 'POST';
+
+          try {
+            const res = await fetch(`/favorites/${type}/${petId}`, { method });
+            if (res.ok) {
+              button.classList.toggle('filled');
+            }
+          } catch (err) {
+            console.error('Favorite toggle failed:', err);
+          }
+        });
       });
     </script>
   </body>
