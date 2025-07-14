@@ -16,7 +16,11 @@
     <h1 style="text-align: center; margin-top: 1rem">
       My Pets Listed for Adoption
     </h1>
-
+    <% if (pets.length === 0) { %>
+    <p class="empty-state" style="text-align: center; margin-top: 2rem">
+      You haven’t listed any pets yet. Add one to help them find a loving home!
+    </p>
+    <% } %>
     <div class="scroll-wrapper">
       <div class="scroll-container">
         <ul>
