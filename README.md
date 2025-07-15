@@ -21,7 +21,7 @@ This app was built to create a friendly platform that makes it easy for both pet
 ## Getting Started
 
 Try PetPal live here:  
- [PetPal App](https://your-live-deployment-link.com) <!-- Replace this -->
+ [PetPal App](https://pet-pal-0763f562ad8f.herokuapp.com)
 
 Planning tools used:  
 [Trello Board](https://trello.com/b/8XabeOEe/pet-pal)  
