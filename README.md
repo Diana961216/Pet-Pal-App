@@ -8,7 +8,7 @@
 
 ---
 
-## 📖 About the App
+## About the App
 
 **PetPal** is a full-stack web application that connects people looking to adopt pets with those listing them for adoption. Visitors can browse adoptable pets (both from user listings and the Petfinder API), search by breed and type, and view pet details.
 
