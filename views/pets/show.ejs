@@ -15,7 +15,7 @@
       <p><strong>Breed:</strong> <%= pet.breed %></p>
       <p><strong>Age:</strong> <%= pet.age %></p>
       <p><strong>Gender:</strong> <%= pet.gender %></p>
-      <p><strong>Owner:</strong> <%= pet.owner.username %></p>
+      <p><strong>Owner:</strong> <%= pet.owner.name || pet.owner.email %></p>
 
       <div class="pet-show-buttons">
         <a href="/pets/<%= pet._id %>/edit" class="btn secondary-btn">Edit</a>
